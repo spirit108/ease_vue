@@ -10,6 +10,7 @@
 import G6 from "@antv/g6";
 import holdData from "../data/holding";
 import treeData from "../data/tree";
+const Hierarchy = require("@antv/hierarchy");
 
 export default {
   mounted() {
@@ -17,14 +18,15 @@ export default {
     console.log(holdData);
     var graph = new G6.TreeGraph({
       container: "hold",
-      width: window.innerWidth,
-      height: window.innerHeight,
+      width: 800,
+      height: 400,
       pixelRatio: 2,
       modes: {
         default: [
           {
-            type: "collapse-expand",
+            type: "collapse-expand", // 定义收缩/展开行为
             onChange: function onChange(item, collapsed) {
+              console.log(item);
               var data = item.get("model").data;
               data.collapsed = collapsed;
               return true;
@@ -35,7 +37,7 @@ export default {
         ]
       },
       defaultNode: {
-        size: 16,
+        size: [200, 100],
         anchorPoints: [[0, 0.5], [1, 0.5]]
       },
       defaultEdge: {
@@ -43,42 +45,29 @@ export default {
       },
       nodeStyle: {
         default: {
-          fill: "#40a9ff",
-          stroke: "#096dd9"
+          fill: "#40a9ff", // 填充颜色
+          stroke: "#096dd9" // 边框颜色
         }
       },
       edgeStyle: {
         default: {
-          stroke: "#A3B1BF"
+          stroke: "#333"
         }
       },
       layout: function layout(data) {
-        return Hierarchy.mindmap(data, {
-          direction: "H",
-          getHeight: function getHeight() {
-            return 16;
-          },
-          getWidth: function getWidth() {
-            return 16;
-          },
-          getVGap: function getVGap() {
-            return 10;
-          },
-          getHGap: function getHGap() {
-            return 100;
-          }
+        return Hierarchy.dendrogram(data, {
+          direction: "V", // H / V / LR / RL / TB / BT
+          nodeSep: 200, // 节点间距
+          rankSep: 150 // 行间距
         });
       }
     });
     graph.data(treeData);
     graph.render();
-    var root = graph.find("node", function(node) {
-      return node.get("model").data.id === "Modeling Methods";
-    });
-    var x = root.get("model").x;
     graph.getNodes().forEach(function(node) {
       var model = node.get("model");
-      model.label = model.data.id;
+      console.log(model);
+      // model.label = model.data.id;
       model.labelCfg = {
         offset: 10,
         style: {
@@ -86,13 +75,9 @@ export default {
         }
       };
       if (model.children && model.children.length > 0) {
-        model.labelCfg.position = "top";
+        model.labelCfg.position = "center";
       } else {
-        if (model.x > x) {
-          model.labelCfg.position = "bottom";
-        } else {
-          model.labelCfg.position = "top";
-        }
+        model.labelCfg.position = "center";
       }
     });
     graph.refresh();
@@ -106,5 +91,6 @@ export default {
   height: 400px;
   border: 1px solid #ccc;
   margin: 0 auto;
+  overflow: hidden;
 }
 </style>
