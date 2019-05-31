@@ -10,7 +10,7 @@
       <button @click="rowMaxNumFn">确认</button>
     </div> -->
     <div class="content">
-      <div class="left-side">
+      <div @contextmenu.prevent="contextmenu" class="left-side">
         <div class="item" @click="addElementFn">方法1</div>
         <div class="item">方法2</div>
         <div class="item">方法3</div>
@@ -30,14 +30,21 @@
           </div>
         </div>
       </div>
+      <context-menu id="context-menu" ref="ctxMenu">
+        <li @click="addFn($event)">option 1</li>
+        <li class="disabled">option 2</li>
+        <li>option 3</li>
+      </context-menu>
     </div>
   </div>
 </template>
 
 <script>
 import twoMatrix from "../utils/utils.js";
+import contextMenu from 'vue-context-menu';
 export default {
   name: "home",
+  components: { contextMenu },
   data() {
     return {
       totalNum: 0,
@@ -70,6 +77,17 @@ export default {
         isEnd: false
       };
       this.imgArr.unshift(obj);
+    },
+    addFn(e) {
+      console.log(e)
+    },
+    contextmenu(e) {
+      console.log(4)
+      console.log(e)
+      this.$refs.ctxMenu.open()
+    },
+    logo(e) {
+      console.log(e)
     }
   },
   created() {
