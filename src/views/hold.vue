@@ -17,6 +17,31 @@ export default {
     new Promise(resolve => resolve(treeData)).then((res) => {
       console.log(treeData);
       console.log(holdData);
+      let _data = [];
+      let holdObj = {};
+
+      _data[0] = {
+        id: 1,
+        label: "test",
+        children: holdData.invest.map(val => {
+          let obj = {};
+          obj.id = val.id || Math.random()*10 + new Date().getTime();
+          return obj;
+        })
+      };
+      _data[1] = {
+        id: 2,
+        label: "edd",
+        children: holdData.path.map(val => {
+          let obj = {};
+          obj.id = val.id || Math.random()*10 + new Date().getTime();
+          return obj;
+        })
+      }
+      holdObj.id = holdData.structure.id;
+      holdObj.label = holdData.structure.name;
+      holdObj.children = _data;
+      console.log(holdObj);
       var graph = new G6.TreeGraph({
         container: "hold",
         width: 1600,
@@ -27,8 +52,8 @@ export default {
             {
               type: "collapse-expand", // 定义收缩/展开行为
               onChange: function onChange(item, collapsed) {
-                var data = item.get && item.get("model").data;
-                data.collapsed = collapsed;
+                // var data = item.get && item.get("model").data;
+                // data.collapsed = collapsed;
                 return true;
               }
             },
@@ -38,7 +63,7 @@ export default {
         },
         defaultNode: {
           size: [200, 100],
-          anchorPoints: [[0, 0.5], [0.5, 0.5]]
+          anchorPoints: [[0.5, 0.5], [0.5, 0.5]]
         },
         defaultEdge: {
           shape: "cubic-horizontal"
@@ -62,22 +87,22 @@ export default {
           });
         }
       });
-      graph.data(holdData.structure);
+      graph.data(holdObj);
       graph.render();
-      this.graph = graph;
-      graph.getNodes().forEach(function(node) {
-        var model = node && node.get("model");
-        model.label = model.name;
-        model.shape = "rect";
-        model.labelCfg = {
-          position: "center",
-          style: {
-            fill: "#333"
-          }
-        };
-      });
-      graph.refresh();
-      graph.fitView();
+      // this.graph = graph;
+      // graph.getNodes().forEach(function(node) {
+      //   var model = node && node.get("model");
+      //   model.label = model.name;
+      //   model.shape = "rect";
+      //   model.labelCfg = {
+      //     position: "center",
+      //     style: {
+      //       fill: "#333"
+      //     }
+      //   };
+      // });
+      // graph.refresh();
+      // graph.fitView();
     });
   }
 };

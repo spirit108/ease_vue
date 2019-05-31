@@ -38,27 +38,63 @@ let data = {
       collapsed: false,
       "children": [
         { "id": "Different initializations",   },
-        { "id": "Different parameter choices",  },
+        { "id": "Different parameter cghhoices",  },
         { "id": "Different architectures",  },
-        { "id": "Different modeling methods",  },
-        { "id": "Different training sets",  },
-        { "id": "Different feature sets",  }
+        { "id": "Different modeling mhfghethods",  },
+        { "id": "Different traininghfg sets",  },
+        { "id": "Different feafhghturhge sets",  },
+        { "id": "Different fhfhfeature sets",  },
+        { "id": "Different featurhge sets",  },
+        { "id": "Different feature hgfhsets",  },
+        { "id": "Different feathhure sets",  },
+        { "id": "Different ffhheature setssg",  },
+        { "id": "Different feature setshfgsedh",  },
+        { "id": "Different feature setshfgh",  },
+        { "id": "Different feature setshgh",  },
+        { "id": "Different feature setshfh",  },
+        { "id": "Different feature setshgfh",  },
+        { "id": "Different feature setshffh",  },
+        { "id": "Different feature setshfh",  },
+        { "id": "Different feature setsfhgh",  },
+        { "id": "Different feature setshfh",  },
+        { "id": "Different feature setghfhs",  },
+        { "id": "Different feature setsgfh",  },
+        { "id": "Different feature setsghg",  },
+        { "id": "Different feature setsghh",  },
+        { "id": "Different feature seghts",  },
+        { "id": "Different feature setsh",  },
+        { "id": "Different feature ghsets",  },
+        { "id": "Different feature setshh",  },
+        { "id": "Different feature sehhts",  },
+        { "id": "Different featurefgh sets",  },
+        { "id": "Different featurde sets",  },
+        { "id": "Different featugre sets",  },
+        { "id": "Different featusets",  },
+        { "id": "Different feature ysets",  },
+        { "id": "Different featurey sets",  },
+        { "id": "Different feature",  },
+        { "id": "Different feature setds",  },
+        { "id": "Different feature seds",  },
+        { "id": "Different feature sedts",  },
+        { "id": "Different feature ses",  },
+        { "id": "Different feature set",  },
+        
       ]
     },
-    {
-      "id": "Consens",
-      label: "dddddd",
+    // {
+    //   "id": "Consens",
+    //   label: "dddddd",
       
-      collapsed: false,
-      "children": [
-        { "id": "initializations",  },
-        { "id": "parameter choices",  },
-        { "id": "architectures",  },
-        { "id": "modeling methods",  },
-        { "id": "training sets",  },
-        { "id": "feature sets", }
-      ]
-    },
+    //   collapsed: false,
+    //   "children": [
+    //     { "id": "initializations",  },
+    //     { "id": "parameter choices",  },
+    //     { "id": "architectures",  },
+    //     { "id": "modeling methods",  },
+    //     { "id": "training sets",  },
+    //     { "id": "feature sets", }
+    //   ]
+    // },
   ]
 };
 export default data;
