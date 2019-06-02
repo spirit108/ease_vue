@@ -19,26 +19,31 @@ export default {
       console.log(holdData);
       let _data = [];
       let holdObj = {};
-
       _data[0] = {
-        id: 1,
-        label: "test",
-        children: holdData.invest.map(val => {
+        id: "dsfdf",
+        label: "控股",
+        shape: "rect",
+        children: holdData.invest.map((val, i)=> {
           let obj = {};
-          obj.id = val.id || Math.random()*10 + new Date().getTime();
+          obj.label = val.name;
+          obj.shape = "rect";
+          obj.id = val.id || parseInt(Math.random()*10) + i;
           return obj;
         })
       };
       _data[1] = {
-        id: 2,
-        label: "edd",
+        id: "dddsfd",
+        label: "投资",
+        shape: "rect",
         children: holdData.path.map(val => {
           let obj = {};
-          obj.id = val.id || Math.random()*10 + new Date().getTime();
+          obj.label = val.value
+          obj.shape = "rect";
+          obj.id = val.id ||  parseInt(Math.random()*10 + new Date().getTime());
           return obj;
         })
       }
-      holdObj.id = holdData.structure.id;
+      holdObj.id = holdData.structure.id + "root";
       holdObj.label = holdData.structure.name;
       holdObj.children = _data;
       console.log(holdObj);
@@ -52,8 +57,8 @@ export default {
             {
               type: "collapse-expand", // 定义收缩/展开行为
               onChange: function onChange(item, collapsed) {
-                // var data = item.get && item.get("model").data;
-                // data.collapsed = collapsed;
+                var data = item.get("model").data;
+                data.collapsed = collapsed;
                 return true;
               }
             },
@@ -87,22 +92,22 @@ export default {
           });
         }
       });
-      graph.data(holdObj);
+      graph.data(holdObj)
       graph.render();
-      // this.graph = graph;
-      // graph.getNodes().forEach(function(node) {
-      //   var model = node && node.get("model");
-      //   model.label = model.name;
-      //   model.shape = "rect";
-      //   model.labelCfg = {
-      //     position: "center",
-      //     style: {
-      //       fill: "#333"
-      //     }
-      //   };
-      // });
-      // graph.refresh();
-      // graph.fitView();
+      this.graph = graph;
+      graph.getNodes().forEach(function(node) {
+        var model = node && node.get("model");
+        // model.label = model.name;
+        // model.shape = "rect";
+        model.labelCfg = {
+          position: "center",
+          style: {
+            fill: "#333"
+          }
+        };
+      });
+      graph.refresh();
+      graph.fitView();
     });
   }
 };
