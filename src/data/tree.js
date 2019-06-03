@@ -7,15 +7,27 @@ let data = {
   "children": [
     {
       "id": "root",
-      
       "label": "华为科技有限公司\n顶顶顶",
       collapsed: false,
       "children": [
         {
           "id": "Logistic regression",
-          // 
+          "children": [
+            {"id": "Logegression"},
+            {"id": "Logistiegression"},
+            {"id": "Loc regression"},
+            {"id": "Logistigression"},
+          ]
         },
-        { "id": "ant analysis",  },
+        { 
+          "id": "ant analysis",
+          "children": [
+            {"id": "ant analysis Logegression"},
+            {"id": "ant analysis Logistiegression"},
+            {"id": " ant analysis Loc regression"},
+            {"id": " ant analysisLog istigression"},
+          ]
+        },
         { "id": "Rules", },
         { "id": "Decision trees",},
         { "id": "Naive Bayes",  },
@@ -37,7 +49,15 @@ let data = {
       
       collapsed: false,
       "children": [
-        { "id": "Different initializations",   },
+        { 
+          "id": "Different initializations",
+          "children": [
+            {"id": "Differentanlysigegression"},
+            {"id": "Differentanlysiogistiegression"},
+            {"id": " DifferentanlysLoc regression"},
+            {"id": " DifferentanlysisLog istigression"},
+          ]
+        },
         { "id": "Different parameter cghhoices",  },
         { "id": "Different architectures",  },
         { "id": "Different modeling mhfghethods",  },

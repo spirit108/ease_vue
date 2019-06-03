@@ -17,40 +17,68 @@ export default {
     new Promise(resolve => resolve(treeData)).then((res) => {
       console.log(treeData);
       console.log(holdData);
+      console.log(holdData.structure.children);
+
       let _data = [];
       let holdObj = {};
+      let idObj = {};
       _data[0] = {
-        id: "dsfdf",
-        label: "控股",
-        shape: "rect",
+        id: "bottom1",
+        label: "+",
+        shape: "circle",
+        size: [10, 10],
+        rankSep: 10,
         children: holdData.invest.map((val, i)=> {
           let obj = {};
           obj.label = val.name;
           obj.shape = "rect";
           obj.id = val.id || parseInt(Math.random()*10) + i;
+          obj.children = val.children;
           return obj;
         })
       };
       _data[1] = {
-        id: "dddsfd",
-        label: "投资",
-        shape: "rect",
-        children: holdData.path.map(val => {
+        id: "top1",
+        label: "+",
+        shape: "circle",
+        size: [10, 10],
+        rankSep: 10,
+        children: holdData.structure.children.map(val => {
           let obj = {};
-          obj.label = val.value
+          obj.label = val.name
           obj.shape = "rect";
-          obj.id = val.id ||  parseInt(Math.random()*10 + new Date().getTime());
+          obj.children = val.children || [];
+          if (!val.id || idObj[val.id]) {
+            obj.id = parseInt(Math.random()*10 + new Date().getTime());
+            idObj[obj.id] = true;
+          } else {
+            obj.id = val.id;
+            idObj[obj.id] = true;
+          }
+
+          obj.children = obj.children.map(val => {
+            let obj = {};
+            obj.label = val.name
+            obj.shape = "rect";
+            if (!val.id || idObj[val.id]) {
+              obj.id = parseInt(Math.random()*10 + new Date().getTime());
+              idObj[obj.id] = true;
+            } else {
+              obj.id = val.id;
+              idObj[obj.id] = true;
+            }
+            return obj;
+          })
           return obj;
         })
       }
-      holdObj.id = holdData.structure.id + "root";
+      holdObj.id = holdData.structure.id;
       holdObj.label = holdData.structure.name;
       holdObj.children = _data;
-      console.log(holdObj);
       var graph = new G6.TreeGraph({
         container: "hold",
-        width: 1600,
-        height: 800,
+        width:1600,
+        height: 1000,
         pixelRatio: 2,
         modes: {
           default: [
@@ -71,7 +99,7 @@ export default {
           anchorPoints: [[0.5, 0.5], [0.5, 0.5]]
         },
         defaultEdge: {
-          shape: "cubic-horizontal"
+          shape: "polyline"
         },
         nodeStyle: {
           default: {
@@ -81,7 +109,8 @@ export default {
         },
         edgeStyle: {
           default: {
-            stroke: "#333"
+            endArrow: true,
+            stroke: "#ccc"
           }
         },
         layout: function layout(data) {
