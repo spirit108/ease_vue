@@ -26,7 +26,7 @@ export default {
         id: "bottom1",
         label: "+",
         shape: "circle",
-        size: [10, 10],
+        size: [20, 20],
         rankSep: 10,
         children: holdData.invest.map((val, i)=> {
           let obj = {};
@@ -41,7 +41,7 @@ export default {
         id: "top1",
         label: "+",
         shape: "circle",
-        size: [10, 10],
+        size: [20, 20],
         rankSep: 10,
         children: holdData.structure.children.map(val => {
           let obj = {};
@@ -117,7 +117,7 @@ export default {
           return Hierarchy.dendrogram(data, {
             direction: "V", // H / V / LR / RL / TB / BT
             nodeSep: 250, // 节点间距
-            rankSep: 200 // 行间距
+            rankSep: 110 // 行间距
           });
         }
       });
