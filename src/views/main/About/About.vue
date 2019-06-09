@@ -11,9 +11,9 @@
 // import G6 from "@antv/g6";
 import echarts from "echarts";
 // 引入测试数据
-import test from "../data/test.js";
+import test from "@/data/test.js";
 // 生成随机位置方法
-import RandomPosition from "../utils/randomPosition.js";
+import RandomPosition from "@/utils/randomPosition.js";
 
 export default {
   data() {

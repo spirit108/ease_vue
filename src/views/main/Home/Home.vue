@@ -1,6 +1,5 @@
 <template>
   <div class="home">
-    <!-- <HelloWorld msg="Welcome to Your Vue.js App" /> -->
     <!-- <div class="input-item">
       <input type="number" placeholder="输入" v-model="totalNum" />
       <button @click="totalNumFn">确认</button>
@@ -8,7 +7,7 @@
     <div>
       <input type="number" placeholder="输入每行最大数量" v-model="rowMaxNum" />
       <button @click="rowMaxNumFn">确认</button>
-    </div> -->
+    </div>-->
     <div class="content">
       <div @contextmenu.prevent="contextmenu" class="left-side">
         <div class="item" @click="addElementFn">方法1</div>
@@ -24,8 +23,8 @@
           :class="{ 'left-wrap': i % 2 }"
         >
           <div v-for="(list, j) in item" :key="j" class="box">
-            <div class="box-list " :class="list.class">
-              <span> {{ list.index }} </span>
+            <div class="box-list" :class="list.class">
+              <span>{{ list.index }}</span>
             </div>
           </div>
         </div>
@@ -40,8 +39,8 @@
 </template>
 
 <script>
-import twoMatrix from "../utils/utils.js";
-import contextMenu from 'vue-context-menu';
+import twoMatrix from "@/utils/utils.js";
+import contextMenu from "vue-context-menu";
 export default {
   name: "home",
   components: { contextMenu },
@@ -79,15 +78,13 @@ export default {
       this.imgArr.unshift(obj);
     },
     addFn(e) {
-      console.log(e)
+      console.log(e);
     },
-    contextmenu(e) {
-      console.log(4)
-      console.log(e)
-      this.$refs.ctxMenu.open()
+    contextmenu() {
+      this.$refs.ctxMenu.open();
     },
     logo(e) {
-      console.log(e)
+      console.log(e);
     }
   },
   created() {

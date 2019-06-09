@@ -8,17 +8,17 @@
 </template>
 <script>
 import G6 from "@antv/g6";
-import holdData from "../data/holding";
-import treeData from "../data/tree";
+import holdData from "@/data/holding";
+import treeData from "@/data/tree";
 const Hierarchy = require("@antv/hierarchy");
 
 export default {
   created() {
-    new Promise(resolve => resolve(treeData)).then((res) => {
+    new Promise(resolve => resolve(treeData)).then(res => {
       console.log(treeData);
       console.log(holdData);
       console.log(holdData.structure.children);
-
+      console.log(res);
       let _data = [];
       let holdObj = {};
       let idObj = {};
@@ -28,11 +28,11 @@ export default {
         shape: "circle",
         size: [20, 20],
         rankSep: 10,
-        children: holdData.invest.map((val, i)=> {
+        children: holdData.invest.map((val, i) => {
           let obj = {};
           obj.label = val.name;
           obj.shape = "rect";
-          obj.id = val.id || parseInt(Math.random()*10) + i;
+          obj.id = val.id || parseInt(Math.random() * 10) + i;
           obj.children = val.children;
           return obj;
         })
@@ -45,11 +45,11 @@ export default {
         rankSep: 10,
         children: holdData.structure.children.map(val => {
           let obj = {};
-          obj.label = val.name
+          obj.label = val.name;
           obj.shape = "rect";
           obj.children = val.children || [];
           if (!val.id || idObj[val.id]) {
-            obj.id = parseInt(Math.random()*10 + new Date().getTime());
+            obj.id = parseInt(Math.random() * 10 + new Date().getTime());
             idObj[obj.id] = true;
           } else {
             obj.id = val.id;
@@ -58,26 +58,26 @@ export default {
 
           obj.children = obj.children.map(val => {
             let obj = {};
-            obj.label = val.name
+            obj.label = val.name;
             obj.shape = "rect";
             if (!val.id || idObj[val.id]) {
-              obj.id = parseInt(Math.random()*10 + new Date().getTime());
+              obj.id = parseInt(Math.random() * 10 + new Date().getTime());
               idObj[obj.id] = true;
             } else {
               obj.id = val.id;
               idObj[obj.id] = true;
             }
             return obj;
-          })
+          });
           return obj;
         })
-      }
+      };
       holdObj.id = holdData.structure.id;
       holdObj.label = holdData.structure.name;
       holdObj.children = _data;
       var graph = new G6.TreeGraph({
         container: "hold",
-        width:1600,
+        width: 1600,
         height: 1000,
         pixelRatio: 2,
         modes: {
@@ -121,7 +121,7 @@ export default {
           });
         }
       });
-      graph.data(holdObj)
+      graph.data(holdObj);
       graph.render();
       this.graph = graph;
       graph.getNodes().forEach(function(node) {

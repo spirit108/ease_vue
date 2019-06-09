@@ -1,5 +1,5 @@
 <template>
   <div>
-    lazycomp
+    childA1
   </div>
 </template>
