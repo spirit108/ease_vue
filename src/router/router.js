@@ -1,105 +1,44 @@
 import Vue from "vue";
 import Router from "vue-router";
-import main from "../views/main.vue";
-import config from "@/config/router.config.js";
+import mainRoutes from "@/config/mainRoute.config.js";
+import globalRoutes from "@/config/globalRoute.config.js";
 
 Vue.use(Router);
 
+// 开发环境不使用懒加载, 因为懒加载页面太多的话会造成webpack热更新太慢, 所以只有生产环境使用懒加载
+const _import = require("./import-" + process.env.NODE_ENV);
+
 console.log(process.env.BASE_URL);
-console.log(config);
+console.log(mainRoutes);
+console.log(globalRoutes);
+
+/**
+ * 添加动态(菜单)路由
+ * @param {*} list 菜单列表
+ * @param {*} path 初始路径
+ */
+function createRouterMenuFn(list, file = "/") {
+  // let temp = [];
+  list.forEach(val => {
+    val.path = (file + val.name).replace("main/", "");
+    val.path = val.path.replace("/main", "/");
+    val.file = file + val.name + "/" + val.name;
+    val.component = _import(val.file);
+    if (val.children && val.children.length) {
+      val.redirect = (file + val.name + "/" + val.children[0].name).replace(
+        "/main",
+        ""
+      );
+      createRouterMenuFn(val.children, file + val.name + "/");
+    }
+  });
+}
+let routers = globalRoutes.concat(mainRoutes);
+createRouterMenuFn(routers);
+console.log(routers);
 
 export default new Router({
   mode: "history",
   base: process.env.BASE_URL,
-  routes: [
-    {
-      path: "/404",
-      name: "404",
-      component: () => import(/* webpackChunkName: "home" */ "../views/404.vue")
-    },
-    {
-      path: "/login",
-      name: "login",
-      component: () =>
-        import(/* webpackChunkName: "home" */ "../views/login.vue")
-    },
-    {
-      path: "/",
-      name: "main",
-      component: main,
-      redirect: "/home",
-      children: [
-        {
-          path: "/",
-          name: "Home",
-          component: () =>
-            import(/* webpackChunkName: "home" */ "../views/main/Home/Home")
-        },
-        {
-          path: "/about",
-          name: "about",
-          component: () =>
-            import(
-              /* webpackChunkName: "about" */ "../views/main/About/About.vue"
-            )
-        },
-        {
-          path: "/hold",
-          name: "hold",
-          component: () =>
-            import(/* webpackChunkName: "about" */ "../views/main/hold/hold")
-        },
-        {
-          path: "/earth",
-          name: "earth",
-          component: () =>
-            import(/* webpackChunkName: "about" */ "../views/main/earth/earth")
-        },
-        {
-          path: "/Child",
-          name: "Child",
-          component: () =>
-            import(/* webpackChunkName: "about" */ "../views/main/Child/Child"),
-          redirect: "/Child/childA",
-          children: [
-            {
-              path: "/Child/childA",
-              name: "childA",
-              component: () =>
-                import(
-                  /* webpackChunkName: "about" */ "../views/main/Child/childA/childA"
-                ),
-              redirect: "/Child/childA/childA1",
-              children: [
-                {
-                  path: "/Child/childA/childA1",
-                  name: "childA1",
-                  component: () =>
-                    import(
-                      /* webpackChunkName: "about" */ "../views/main/Child/childA/childA1/childA1"
-                    )
-                },
-                {
-                  path: "/Child/childA/childA2",
-                  name: "childA2",
-                  component: () =>
-                    import(
-                      /* webpackChunkName: "about" */ "../views/main/Child/childA/childA2/childA2"
-                    )
-                }
-              ]
-            },
-            {
-              path: "/Child/childB",
-              name: "childB",
-              component: () =>
-                import(
-                  /* webpackChunkName: "about" */ "../views/main/Child/childB/childB"
-                )
-            }
-          ]
-        }
-      ]
-    }
-  ]
+  routes: routers
 });

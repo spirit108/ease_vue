@@ -70,6 +70,7 @@ export default {
     // 选择导航
     selectNavFn(e) {
       if (e.target.dataset.index >= 0) {
+        this.isShow = false;
         this.isNav = e.target.dataset.index;
       }
     }
