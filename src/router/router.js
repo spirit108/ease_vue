@@ -18,7 +18,6 @@ console.log(globalRoutes);
  * @param {*} path 初始路径
  */
 function createRouterMenuFn(list, file = "/") {
-  // let temp = [];
   list.forEach(val => {
     val.path = (file + val.name).replace("main/", "");
     val.path = val.path.replace("/main", "/");
@@ -37,8 +36,17 @@ let routers = globalRoutes.concat(mainRoutes);
 createRouterMenuFn(routers);
 console.log(routers);
 
-export default new Router({
+const RouterObj = new Router({
   mode: "history",
   base: process.env.BASE_URL,
   routes: routers
 });
+
+RouterObj.afterEach((to, from) => {
+  console.log(4);
+  console.log(to);
+  console.log(5);
+  console.log(from);
+});
+
+export default RouterObj;

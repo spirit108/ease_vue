@@ -3,7 +3,9 @@
     <div id="nav">
       <nav-menu :navArr="navArr"></nav-menu>
     </div>
-    <router-view />
+    <transition name="fade">
+      <router-view class="view"></router-view>
+    </transition>
   </div>
 </template>
 <script>

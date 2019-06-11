@@ -1,5 +1,12 @@
+/**
+ * 主页面路由配置
+ * 有导航条的页面
+ * isNavTable: 是否在菜单显示路由
+ * name： 文件目录名
+ * children： 子菜单
+ */
 const mainRoutes = {
-  name: "main",
+  name: "main", // 主页面
   title: "main",
   children: [
     {
@@ -36,12 +43,12 @@ const mainRoutes = {
               name: "childA1",
               title: "子菜单1",
               isNavTable: true
-            },
-            {
-              name: "childA2",
-              title: "子菜单2",
-              isNavTable: true
             }
+            // {
+            //   name: "childA2",
+            //   title: "子菜单2",
+            //   isNavTable: true
+            // }
           ]
         },
         {
