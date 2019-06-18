@@ -4,7 +4,9 @@ import router from "./router/router";
 import store from "./store";
 import "@/ui/element";
 import "element-ui/lib/theme-chalk/index.css";
+import axios from "axios";
 
+Vue.prototype.$http = axios;
 Vue.config.productionTip = false;
 
 new Vue({

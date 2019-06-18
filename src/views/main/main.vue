@@ -109,6 +109,11 @@ export default {
         }
       ]
     };
+  },
+  created() {
+    this.$http.get("/api/user?id=1").then(res => {
+      console.log(res.data);
+    });
   }
 };
 </script>
