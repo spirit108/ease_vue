@@ -10,10 +10,16 @@ module.exports = {
     overlay: true,
     stats: "errors-only",
     before: app => {
-      app.get("/api/*", (req, res) => {
+      app.get("/api/res", (req, res) => {
         console.log(req.route);
         res.json({
           name: "mock"
+        });
+      });
+      app.get("/api/use", (req, res) => {
+        console.log(req.route);
+        res.json({
+          name: "mock1"
         });
       });
     }
