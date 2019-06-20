@@ -1,3 +1,4 @@
+/* eslint-disable */
 let arr = [
   {
     "name": "United States",

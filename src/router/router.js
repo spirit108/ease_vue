@@ -6,7 +6,12 @@ import globalRoutes from "@/config/globalRoute.config.js";
 Vue.use(Router);
 
 // 开发环境不使用懒加载, 因为懒加载页面太多的话会造成webpack热更新太慢, 所以只有生产环境使用懒加载
-const _import = require("./import-" + process.env.NODE_ENV);
+console.log(process.env.NODE_ENV);
+let loadPath = "production";
+if (process.env.NODE_ENV == "development" || process.env.NODE_ENV == "dev") {
+  loadPath = "development";
+}
+const _import = require("./import-" + loadPath);
 
 console.log(process.env.BASE_URL);
 console.log(mainRoutes);
