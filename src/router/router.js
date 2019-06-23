@@ -39,7 +39,6 @@ function createRouterMenuFn(list, file = "/") {
 }
 let routers = globalRoutes.concat(mainRoutes);
 createRouterMenuFn(routers);
-console.log(routers);
 
 const RouterObj = new Router({
   mode: "history",

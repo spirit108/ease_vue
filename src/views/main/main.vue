@@ -111,8 +111,15 @@ export default {
     };
   },
   created() {
-    this.$http.get("/api/user?id=1").then(res => {
-      console.log(res.data);
+    this.$http(
+      "/mock/api/user",
+      {
+        id: 1
+      },
+      "GET",
+      "normal"
+    ).then(res => {
+      console.log(res);
     });
   }
 };
