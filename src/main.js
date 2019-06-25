@@ -8,6 +8,7 @@ import http from "./http/http";
 
 // 需要进行拦截的请求
 Vue.prototype.$http = http;
+
 Vue.config.productionTip = false;
 
 new Vue({

@@ -2,6 +2,7 @@ import Vue from "vue";
 import Router from "vue-router";
 import mainRoutes from "@/config/mainRoute.config.js";
 import globalRoutes from "@/config/globalRoute.config.js";
+import http from "../http/http";
 
 Vue.use(Router);
 
@@ -12,6 +13,7 @@ if (process.env.NODE_ENV == "development" || process.env.NODE_ENV == "dev") {
   loadPath = "development";
 }
 const _import = require("./import-" + loadPath);
+let getRouter = null;
 
 console.log(process.env.BASE_URL);
 console.log(mainRoutes);
@@ -47,6 +49,14 @@ const RouterObj = new Router({
 });
 
 RouterObj.afterEach((to, from) => {
+  console.log(getRouter);
+  if (!getRouter) {
+    http("/mock/api/menuList", "", "get", "").then(res => {
+      console.log(res);
+      console.log(getRouter)
+      getRouter = res;
+    });
+  }
   console.log(4);
   console.log(to);
   console.log(5);

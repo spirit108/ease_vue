@@ -111,16 +111,16 @@ export default {
     };
   },
   created() {
-    this.$http(
-      "/mock/api/user",
-      {
-        id: 1
-      },
-      "GET",
-      "normal"
-    ).then(res => {
-      console.log(res);
-    });
+    // this.$http(
+    //   "/mock/api/user",
+    //   {
+    //     id: 1
+    //   },
+    //   "GET",
+    //   "normal"
+    // ).then(res => {
+    //   console.log(res);
+    // });
   }
 };
 </script>

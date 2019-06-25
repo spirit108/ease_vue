@@ -5,6 +5,7 @@ function mockFetch(app) {
     fs.readFile(`.${req._parsedUrl.pathname}.json`, (err, data) => {
       if (err) {
         res.send({ code: 404, err: err });
+        return;
       }
       res.send(data);
     });
