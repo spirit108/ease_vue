@@ -1,0 +1,33 @@
+{
+  "menuList": [
+    {
+      "name": "Child",
+      "title": "一级菜单",
+      "isNavTable": true,
+      "children": [
+        {
+          "name": "childA",
+          "title": "一级子菜单",
+          "isNavTable": true,
+          "children": [
+            {
+              "name": "childA1",
+              "title": "二级子菜单A",
+              "isNavTable": true
+            },
+            {
+              "name": "childA2",
+              "title": "二级子菜单B",
+              "isNavTable": true
+            }
+          ]
+        },
+        {
+          "name": "childB",
+          "title": "二级子菜单",
+          "isNavTable": true
+        }
+      ]
+    }
+  ]
+}

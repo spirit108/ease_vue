@@ -51,9 +51,9 @@ const RouterObj = new Router({
 RouterObj.afterEach((to, from) => {
   console.log(getRouter);
   if (!getRouter) {
-    http("/mock/api/menuList", "", "get", "").then(res => {
+    http.getRequest("/mock/api/menuList").then(res => {
       console.log(res);
-      console.log(getRouter)
+      console.log(getRouter);
       getRouter = res;
     });
   }
