@@ -1,5 +1,6 @@
 <template>
   <div class="home">
+    <div>{{ $store.state.auth.token }}</div>
     <!-- <div class="input-item">
       <input type="number" placeholder="输入" v-model="totalNum" />
       <button @click="totalNumFn">确认</button>
@@ -9,9 +10,10 @@
       <button @click="rowMaxNumFn">确认</button>
     </div>-->
     <div class="content">
+      <!-- <div>{{ $store.state.auth.userName }}</div> -->
       <div @contextmenu.prevent="contextmenu" class="left-side">
         <div class="item" @click="addElementFn">方法1</div>
-        <div class="item">方法2</div>
+        <div class="item" @click="changeFn">方法2</div>
         <div class="item">方法3</div>
         <div class="item">方法4</div>
       </div>
@@ -80,6 +82,9 @@ export default {
     addFn(e) {
       console.log(e);
     },
+    changeFn() {
+      this.$store.dispatch("auth/setTokenFn", "haha");
+    },
     contextmenu() {
       this.$refs.ctxMenu.open();
     },
@@ -89,6 +94,8 @@ export default {
   },
   created() {
     this.imgArr = [];
+    console.log(this.$store);
+    console.log(this.$store.getters["auth/token"]);
   },
   watch: {
     imgArr(newValue) {

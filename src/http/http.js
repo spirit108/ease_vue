@@ -1,5 +1,5 @@
 import axios from "axios";
-import store from "../store";
+import store from "../Store/store";
 // 引入弹窗组件
 import { Message, Loading } from "element-ui";
 // 引入路由跳转
