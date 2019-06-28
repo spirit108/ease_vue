@@ -1,28 +1,26 @@
 import Vue from "vue";
 import Router from "vue-router";
-import mainRoutes from "../Config/mainRoute.config.js";
-import globalRoutes from "../Config/globalRoute.config.js";
+import store from "../Store/store";
+import mainRoutes from "@/config/mainRoute.config.js";
+import globalRoutes from "@/config/globalRoute.config.js";
 import http from "../Http/http";
+import { activeRouter } from "../config/globalConfig";
+import cloneDeep from "lodash/cloneDeep";
 
 Vue.use(Router);
 
 // 开发环境不使用懒加载, 因为懒加载页面太多的话会造成webpack热更新太慢, 所以只有生产环境使用懒加载
-console.log(process.env.NODE_ENV);
 let loadPath = "production";
 if (process.env.NODE_ENV == "development" || process.env.NODE_ENV == "dev") {
   loadPath = "development";
 }
 const _import = require("./import-" + loadPath);
-let getRouter = null;
-
-console.log(process.env.BASE_URL);
-console.log(mainRoutes);
-console.log(globalRoutes);
-
+let routerFlag = false;
+let routerArr = [];
 /**
- * 添加动态(菜单)路由
+ * 添加固定(菜单)路由
  * @param {*} list 菜单列表
- * @param {*} path 初始路径
+ * @param {*} file 初始路径
  */
 function createRouterMenuFn(list, file = "/") {
   list.forEach(val => {
@@ -37,9 +35,12 @@ function createRouterMenuFn(list, file = "/") {
       );
       createRouterMenuFn(val.children, file + val.name + "/");
     }
+    let obj = Object.assign(val);
+    // obj.component = "";
+    routerArr.push(obj);
   });
 }
-let routers = globalRoutes.concat(mainRoutes);
+let routers = globalRoutes[0].children.concat(mainRoutes);
 createRouterMenuFn(routers);
 
 const RouterObj = new Router({
@@ -49,17 +50,24 @@ const RouterObj = new Router({
 });
 
 RouterObj.afterEach((to, from) => {
-  console.log(getRouter);
-  if (!getRouter) {
-    http.getRequest("/mock/api/menuList").then(res => {
-      console.log(res);
-      console.log(getRouter);
-      getRouter = res;
+  let _routers = cloneDeep(routers[0]),
+    routerArr = cloneDeep(routers[0]).children;
+  if (!routerFlag && activeRouter) {
+    http.getRequest("/mock/api/menuList", "", true).then(res => {
+      _routers.children = res.menuList;
+      createRouterMenuFn([_routers]);
+      RouterObj.addRoutes([_routers]);
+      routerArr = routerArr.concat(_routers.children);
+      console.log(546);
+      console.log(JSON.stringify(routerArr));
+      store.dispatch("auth/setMenuList", JSON.stringify(routerArr));
+      routerFlag = true;
     });
+  } else {
+    console.log(4);
+    console.log(routerArr);
   }
-  console.log(4);
   console.log(to);
-  console.log(5);
   console.log(from);
 });
 
