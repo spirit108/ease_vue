@@ -1,10 +1,10 @@
 import Vue from "vue";
 import App from "./App.vue";
-import router from "./router/router";
+import router from "./Router/router";
 import store from "./Store/store";
-import "@/ui/element";
-import "element-ui/lib/theme-chalk/index.css";
-import http from "./http/http";
+import "./Ui/element";
+
+import http from "./Http/http";
 
 // 需要进行拦截的请求
 Vue.prototype.$http = http;

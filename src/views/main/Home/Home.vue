@@ -41,7 +41,7 @@
 </template>
 
 <script>
-import twoMatrix from "@/utils/utils.js";
+import twoMatrix from "@/Utils/utils.js";
 import contextMenu from "vue-context-menu";
 export default {
   name: "home",

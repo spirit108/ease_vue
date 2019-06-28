@@ -1,8 +1,8 @@
 import Vue from "vue";
 import Router from "vue-router";
-import mainRoutes from "@/config/mainRoute.config.js";
-import globalRoutes from "@/config/globalRoute.config.js";
-import http from "../http/http";
+import mainRoutes from "../Config/mainRoute.config.js";
+import globalRoutes from "../Config/globalRoute.config.js";
+import http from "../Http/http";
 
 Vue.use(Router);
 

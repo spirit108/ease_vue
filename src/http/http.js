@@ -3,7 +3,7 @@ import store from "../Store/store";
 // 引入弹窗组件
 import { Message, Loading } from "element-ui";
 // 引入路由跳转
-import router from "../router/router";
+import router from "../Router/router";
 // load配置
 let options = {};
 // 添加请求拦截器
