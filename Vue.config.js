@@ -1,7 +1,16 @@
-let mockFetch = require("./mock/index");
+const mockFetch = require("./mock/index");
+const BundleAnalyzerPlugin = require("webpack-bundle-analyzer")
+  .BundleAnalyzerPlugin;
 
 module.exports = {
   publicPath: process.env.NODE_ENV === "production" ? "./" : "/",
+  configureWebpack: () => {
+    if (process.env.NODE_ENV === "production") {
+      return {
+        plugins: [new BundleAnalyzerPlugin()]
+      };
+    }
+  },
   devServer: {
     proxy: {
       "/api": {

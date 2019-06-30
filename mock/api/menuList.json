@@ -2,30 +2,40 @@
   "menuList": [
     {
       "name": "Child",
-      "title": "一级菜单",
       "isNavTable": true,
+      "meta": {
+        "title": "一级菜单"
+      },
       "children": [
         {
           "name": "childA",
-          "title": "一级子菜单",
           "isNavTable": true,
+          "meta": {
+            "title": "一级菜单"
+          },
           "children": [
             {
               "name": "childA1",
-              "title": "二级子菜单A",
-              "isNavTable": true
+              "isNavTable": true,
+              "meta": {
+                "title": "二级子菜单A"
+              }
             },
             {
               "name": "childA2",
-              "title": "二级子菜单B",
-              "isNavTable": true
+              "isNavTable": true,
+              "meta": {
+                "title": "二级子菜单B"
+              }
             }
           ]
         },
         {
           "name": "childB",
-          "title": "二级子菜单",
-          "isNavTable": true
+          "isNavTable": true,
+          "meta": {
+            "title": "二级子菜单"
+          }
         }
       ]
     }

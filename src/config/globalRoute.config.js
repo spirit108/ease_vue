@@ -4,13 +4,20 @@
  */
 const globalRoutes = [
   {
+    name: "main", // 主页面
+    children: []
+  },
+  {
     name: "404",
-    title: "404",
-    path: ""
+    meta: {
+      title: "404"
+    }
   },
   {
     name: "login",
-    title: "login"
+    meta: {
+      title: "login"
+    }
   }
 ];
 export default globalRoutes;

@@ -21,60 +21,7 @@ export default {
     NavMenu
   },
   data() {
-    return {
-      navArr: [
-        {
-          path: "/",
-          name: "Home"
-        },
-        {
-          path: "/about",
-          name: "about"
-        },
-        {
-          path: "/hold",
-          name: "hold"
-        },
-        {
-          path: "/earth",
-          name: "earth"
-        },
-        {
-          path: "/Child",
-          name: "三级菜单",
-          children: [
-            {
-              path: "/Child/childA",
-              name: "childA",
-              children: [
-                {
-                  path: "/Child/childA/childA1",
-                  name: "childA1",
-                  children: [
-                    {
-                      path: "/Child/childA/childA1",
-                      name: "childA1"
-                    },
-                    {
-                      path: "/Child/childA/childA2",
-                      name: "childA2"
-                    }
-                  ]
-                },
-                {
-                  path: "/Child/childA/childA2",
-                  name: "childA2"
-                }
-              ]
-            },
-            {
-              path: "/Child/childB",
-              name: "childB"
-            }
-          ]
-        }
-      ]
-    };
+    return {};
   },
   created() {
     this.$http
@@ -84,6 +31,11 @@ export default {
       .then(res => {
         console.log(res);
       });
+  },
+  computed: {
+    navArr() {
+      return this.$store.getters["auth/getMenu"];
+    }
   }
 };
 </script>

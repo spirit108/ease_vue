@@ -1,16 +1,19 @@
+/**
+ * 有关用户授权的信息
+ */
 export default {
-  namespaced: true,
+  namespaced: false,
   state: {
-    token: "testeee",
+    isAuth: true,
     user: null,
     menuList: ""
   },
   mutations: {
-    setTokenFn(state, val) {
-      state.token = val;
+    setAuthTagFn(state, val) {
+      state.isAuth = val;
     },
-    removeTokenFn(state) {
-      state.token = "";
+    removeAuthTagFn(state) {
+      state.isAuth = false;
     },
     setUserFn(state, val) {
       state.user = val;
@@ -27,12 +30,12 @@ export default {
   },
   actions: {
     // 设置token
-    setTokenFn({ commit }, val) {
-      commit("setTokenFn", val);
+    setAuthTagFn({ commit }, val) {
+      commit("setAuthTagFn", val);
     },
     //重置token
-    removeTokenFn({ commit }) {
-      commit("removeTokenFn");
+    removeAuthTagFn({ commit }) {
+      commit("removeAuthTagFn");
     },
     // 设置用户信息
     setUserFn({ commit }, val) {
@@ -53,8 +56,8 @@ export default {
   },
   getters: {
     // 获得token信息
-    getToken(state) {
-      return state.token;
+    getAuthTagFn(state) {
+      return state.isAuth;
     },
     // 获得用户信息
     getUser(state) {
@@ -62,7 +65,7 @@ export default {
     },
     // 获得用户菜单
     getMenu(state) {
-      return state.menuList && JSON.parse(state.menuList);
+      return (state.menuList && JSON.parse(state.menuList)) || [];
     }
   }
 };

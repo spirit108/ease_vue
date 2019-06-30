@@ -3,7 +3,7 @@
     <li v-for="(item, i) in navArr" :key="i" class="child-menu-list">
       <div v-if="item.children && item.children.length">
         <p class="child-menu-title">
-          {{ item.name }}
+          {{ item.meta.title }}
         </p>
         <div class="child-menu-list-wrap">
           <child-nav-list
@@ -18,7 +18,7 @@
           :to="item.path"
           :data-index="navIndex"
         >
-          {{ item.name }}
+          {{ item.meta.title }}
         </router-link>
       </div>
     </li>
@@ -50,7 +50,7 @@ export default {
     color: #333;
     display: flex;
     align-items: center;
-    font-size: 20px;
+    white-space: nowrap;
   }
 }
 .child-menu-list-wrap {
@@ -64,6 +64,8 @@ export default {
       align-items: center;
       font-size: 16px;
       border: 0;
+      width: auto;
+      white-space: nowrap;
     }
     .link:hover {
       color: rgb(95, 233, 141);

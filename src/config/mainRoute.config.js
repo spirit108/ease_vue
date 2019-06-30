@@ -5,30 +5,38 @@
  * name： 文件目录名
  * children： 子菜单
  */
-const mainRoutes = {
-  name: "main", // 主页面
-  title: "main",
-  children: [
-    {
-      name: "Home",
+const mainRoutes = [
+  {
+    name: "Home",
+    isNavTable: true,
+    meta: {
       title: "首页",
-      isNavTable: true
-    },
-    {
-      name: "About",
-      title: "关于",
-      isNavTable: true
-    },
-    {
-      name: "hold",
-      title: "股权",
-      isNavTable: true
-    },
-    {
-      name: "earth",
-      title: "地球",
-      isNavTable: true
+      isAuth: false
     }
-  ]
-};
+  },
+  {
+    name: "About",
+    isNavTable: true,
+    meta: {
+      title: "About",
+      isAuth: true
+    }
+  },
+  {
+    name: "hold",
+    isNavTable: true,
+    meta: {
+      title: "hold",
+      isAuth: true
+    }
+  },
+  {
+    name: "earth",
+    isNavTable: true,
+    meta: {
+      title: "earth",
+      isAuth: true
+    }
+  }
+];
 export default mainRoutes;

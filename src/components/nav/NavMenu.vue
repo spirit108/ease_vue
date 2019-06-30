@@ -12,7 +12,7 @@
         @mouseout="closeChildMenuFn"
       >
         <p class="menu-title">
-          {{ item.name }}
+          {{ item.meta.title }}
           <i class="el-icon-caret-bottom"></i>
         </p>
         <div
@@ -29,7 +29,7 @@
       </div>
       <div v-else>
         <router-link class="menu-title link" :to="item.path" :data-index="i">
-          {{ item.name }}
+          {{ item.meta.title }}
         </router-link>
       </div>
     </li>
@@ -50,7 +50,7 @@ export default {
   },
   data() {
     return {
-      isShow: false,
+      isShow: -1,
       timeOut: null,
       isNav: null
     };
@@ -59,7 +59,7 @@ export default {
     // 移除关闭下拉菜单
     closeChildMenuFn() {
       this.timeOut = setTimeout(() => {
-        this.isShow = false;
+        this.isShow = -1;
       }, 300);
     },
     // 移入下拉菜单展示下拉菜单
@@ -70,7 +70,7 @@ export default {
     // 选择导航
     selectNavFn(e) {
       if (e.target.dataset.index >= 0) {
-        this.isShow = false;
+        this.isShow = -1;
         this.isNav = e.target.dataset.index;
       }
     }
@@ -81,7 +81,7 @@ export default {
   computed: {
     _navArr() {
       return this.navArr.map(val => {
-        val.isShow = false;
+        val.isShow = -1;
         return val;
       });
     }
@@ -130,7 +130,7 @@ export default {
       z-index: 1000;
       top: 50px;
       right: 0;
-      overflow: hidden;
+      min-width: 100px;
       width: auto;
       height: auto;
       padding-top: 10px;

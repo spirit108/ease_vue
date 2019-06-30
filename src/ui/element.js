@@ -32,7 +32,7 @@ import {
   // Select,
   // Option,
   // OptionGroup,
-  // Button,
+  Button,
   // ButtonGroup,
   // Table,
   // TableColumn,
@@ -79,7 +79,7 @@ import {
   // Notification
 } from "element-ui";
 // import CollapseTransition from "element-ui/lib/transitions/collapse-transition";
-// import "element-ui/lib/theme-chalk/index.css";
+import "element-ui/lib/theme-chalk/index.css";
 
 // Vue.use(Pagination);
 // Vue.use(Dialog);
@@ -103,7 +103,7 @@ import {
 // Vue.use(Select);
 // Vue.use(Option);
 // Vue.use(OptionGroup);
-// Vue.use(Button);
+Vue.use(Button);
 // Vue.use(ButtonGroup);
 // Vue.use(Table);
 // Vue.use(TableColumn);
@@ -154,5 +154,4 @@ Vue.use(Main);
 // Vue.prototype.$prompt = MessageBox.prompt;
 // Vue.prototype.$notify = Notification;
 // Vue.prototype.$message = Message;
-
-// Vue.prototype.$ELEMENT = { size: "medium" };
+Vue.prototype.$ELEMENT = { size: "medium" };

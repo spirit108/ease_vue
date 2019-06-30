@@ -63,8 +63,6 @@ export default {
     },
     // 输入每一行最大数量
     rowMaxNumFn() {
-      console.log(this.totalNum);
-      console.log(this.rowMaxNum);
       let _imgArr = [].concat(this.imgArr);
       let _row = parseInt(this.rowMaxNum) || 3;
       this.matrix = twoMatrix(_imgArr, this.totalNum, _row);

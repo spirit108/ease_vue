@@ -40,7 +40,8 @@ function createRouterMenuFn(list, file = "/") {
     routerArr.push(obj);
   });
 }
-let routers = globalRoutes[0].children.concat(mainRoutes);
+globalRoutes[0].children = globalRoutes[0].children.concat(mainRoutes);
+let routers = globalRoutes;
 createRouterMenuFn(routers);
 
 const RouterObj = new Router({
@@ -49,26 +50,39 @@ const RouterObj = new Router({
   routes: routers
 });
 
+RouterObj.beforeEach((to, from, next) => {
+  let isLogin = store.getters["auth/getAuthTagFn"];
+  if (to.meta.isAuth) {
+    if (isLogin) {
+      next();
+    } else {
+      next({ path: "/login" });
+    }
+  } else {
+    next();
+  }
+});
+// 动态路由
 RouterObj.afterEach((to, from) => {
   let _routers = cloneDeep(routers[0]),
-    routerArr = cloneDeep(routers[0]).children;
-  if (!routerFlag && activeRouter) {
-    http.getRequest("/mock/api/menuList", "", true).then(res => {
-      _routers.children = res.menuList;
-      createRouterMenuFn([_routers]);
-      RouterObj.addRoutes([_routers]);
-      routerArr = routerArr.concat(_routers.children);
-      console.log(546);
-      console.log(JSON.stringify(routerArr));
+    routerArr = cloneDeep(routers[0]).children,
+    isLogin = store.getters["auth/getAuthTagFn"];
+  document.title = to.meta.title;
+  if (isLogin) {
+    if (!routerFlag && activeRouter && from.path == "/") {
+      http.getRequest("/mock/api/menuList", "", true).then(res => {
+        _routers.children = res.menuList;
+        createRouterMenuFn([_routers]);
+        RouterObj.addRoutes([_routers]); // 添加动态路由
+        routerArr = routerArr.concat(_routers.children);
+        store.dispatch("auth/setMenuList", JSON.stringify(routerArr));
+        routerFlag = true;
+      });
+    } else {
       store.dispatch("auth/setMenuList", JSON.stringify(routerArr));
-      routerFlag = true;
-    });
+    }
   } else {
-    console.log(4);
-    console.log(routerArr);
+    store.dispatch("auth/setMenuList", JSON.stringify(routerArr));
   }
-  console.log(to);
-  console.log(from);
 });
-
 export default RouterObj;
