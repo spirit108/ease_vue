@@ -3,14 +3,14 @@ import App from "./App.vue";
 import router from "./Router/router";
 import store from "./Store/store";
 import "./Ui/element";
-import http from "./Http/http";
+import Http from "./Http/http";
 // 404页面
 const notFound = {
   path: "*",
   redirect: "/404"
 };
 // 需要进行拦截的请求
-Vue.prototype.$http = http;
+Vue.prototype.$Http = Http;
 Vue.config.productionTip = false;
 
 new Vue({

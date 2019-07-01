@@ -1,39 +1,52 @@
 <template>
-  <ul class="nav-wrap" @click="selectNavFn">
-    <li
-      class="nav-item"
-      :class="{ 'nav-active': i == isNav }"
-      v-for="(item, i) in navArr"
-      :key="i"
+  <div class="nav">
+    <slot name="nav-icon"></slot>
+    <ul
+      class="nav-main"
+      @click="selectNavFn"
+      :class="{ 'nav-type': navType !== 'normal' }"
     >
-      <div
-        v-if="item.children && item.children.length"
-        @mouseover="showChildMenuFn(i)"
-        @mouseout="closeChildMenuFn"
+      <li
+        class="nav-item"
+        :class="{ 'nav-active': i == isNav }"
+        v-for="(item, i) in navArr"
+        :key="i"
       >
-        <p class="menu-title">
-          {{ item.meta.title }}
-          <i class="el-icon-caret-bottom"></i>
-        </p>
         <div
-          class="child-menu-wrap"
-          v-if="i == isShow"
-          :data-index="i"
+          v-if="item.children && item.children.length"
           @mouseover="showChildMenuFn(i)"
+          @mouseout="closeChildMenuFn"
         >
-          <child-nav-list
-            :navArr="item.children"
-            :navIndex="i"
-          ></child-nav-list>
+          <p class="menu-title">
+            {{ item.meta.title }}
+            <i class="el-icon-caret-bottom"></i>
+          </p>
+          <div
+            class="child-menu-wrap"
+            v-if="i == isShow"
+            :data-index="i"
+            @mouseover="showChildMenuFn(i)"
+          >
+            <child-nav-list
+              :navArr="item.children"
+              :navIndex="i"
+            ></child-nav-list>
+          </div>
         </div>
-      </div>
-      <div v-else>
-        <router-link class="menu-title link" :to="item.path" :data-index="i">
-          {{ item.meta.title }}
-        </router-link>
-      </div>
-    </li>
-  </ul>
+        <div v-else>
+          <router-link
+            class="menu-title link"
+            :to="item.path"
+            :data-index="i"
+            v-if="item.isNavTable"
+          >
+            {{ item.meta.title }}
+          </router-link>
+        </div>
+      </li>
+    </ul>
+    <slot name="nav-sub"></slot>
+  </div>
 </template>
 <script>
 import ChildNavList from "./ChildNavList";
@@ -46,6 +59,10 @@ export default {
       default() {
         return [];
       }
+    },
+    navType: {
+      type: String,
+      default: "normal"
     }
   },
   data() {
@@ -89,9 +106,20 @@ export default {
 };
 </script>
 <style lang="less">
-.nav-wrap {
+.nav {
   height: 60px;
-  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(233, 233, 233, 0.6);
+  .nav-type {
+    justify-content: flex-start;
+  }
+}
+
+.nav-main {
+  flex: 1;
   list-style: none;
   display: flex;
   flex-direction: row;
@@ -99,7 +127,6 @@ export default {
   margin: 0;
   padding: 0 30px;
   box-sizing: border-box;
-  border-bottom: 1px solid rgba(233, 233, 233, 0.8);
   .nav-active {
     border-bottom: 4px solid rgb(153, 231, 176);
   }

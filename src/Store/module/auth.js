@@ -2,11 +2,13 @@
  * 有关用户授权的信息
  */
 export default {
-  namespaced: false,
+  namespaced: true, // 模块命名空间，勿动
   state: {
-    isAuth: true,
+    isAuth: false,
     user: null,
-    menuList: ""
+    topMain: "",
+    topSub: "",
+    asideMain: ""
   },
   mutations: {
     setAuthTagFn(state, val) {
@@ -21,19 +23,31 @@ export default {
     removeUserFn(state) {
       state.user = null;
     },
-    setMenuList(state, val) {
-      state.menuList = val;
+    setTopMain(state, val) {
+      state.topMain = val;
     },
-    removeMenuList(state) {
-      state.menuList = "";
+    removeTopMain(state) {
+      state.topMain = "";
+    },
+    setTopSub(state, val) {
+      state.topSub = val;
+    },
+    removeTopSub(state) {
+      state.topSub = "";
+    },
+    setAsideMain(state, val) {
+      state.asideMain = val;
+    },
+    removeAsideMain(state) {
+      state.asideMain = "";
     }
   },
   actions: {
-    // 设置token
+    // 设置登录标志
     setAuthTagFn({ commit }, val) {
       commit("setAuthTagFn", val);
     },
-    //重置token
+    // 设置登录标志
     removeAuthTagFn({ commit }) {
       commit("removeAuthTagFn");
     },
@@ -45,17 +59,33 @@ export default {
     removeUserFn({ commit }) {
       commit("removeUserFn");
     },
-    // 设置用户菜单
-    setMenuList({ commit }, val) {
-      commit("setMenuList", val);
+    // 设置用户上方主菜单
+    setTopMain({ commit }, val) {
+      commit("setTopMain", val);
     },
-    // 重置用户菜单
-    removeMenuList({ commit }) {
-      commit("removeMenuList");
+    // 重置用户上方主菜单
+    removeTopMain({ commit }) {
+      commit("removeTopMain");
+    },
+    // 设置用户上方副菜单
+    setTopSub({ commit }, val) {
+      commit("setTopSub", val);
+    },
+    // 重置用户上方副菜单
+    removeTopSub({ commit }) {
+      commit("removeTopSub");
+    },
+    // 设置用户上方副菜单
+    setAsideMain({ commit }, val) {
+      commit("setAsideMain", val);
+    },
+    // 重置用户上方主菜单
+    removeAsideMain({ commit }) {
+      commit("removeAsideMain");
     }
   },
   getters: {
-    // 获得token信息
+    // 获得登陆标志
     getAuthTagFn(state) {
       return state.isAuth;
     },
@@ -63,9 +93,17 @@ export default {
     getUser(state) {
       return state.user;
     },
-    // 获得用户菜单
-    getMenu(state) {
-      return (state.menuList && JSON.parse(state.menuList)) || [];
+    // 获得用户上方主菜单
+    getTopMain(state) {
+      return (state.topMain && JSON.parse(state.topMain)) || [];
+    },
+    // 获得用户上方副菜单
+    getTopSub(state) {
+      return (state.topSub && JSON.parse(state.topSub)) || [];
+    },
+    // 获得用户侧边主菜单
+    getAsideMain(state) {
+      return (state.asideMain && JSON.parse(state.asideMain)) || [];
     }
   }
 };

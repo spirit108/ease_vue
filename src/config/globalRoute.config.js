@@ -5,6 +5,10 @@
 const globalRoutes = [
   {
     name: "main", // 主页面
+    meta: {
+      title: "首页",
+      isAuth: true
+    },
     children: []
   },
   {

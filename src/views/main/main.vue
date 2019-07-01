@@ -2,7 +2,7 @@
   <div class="main">
     <el-header>
       <div id="nav">
-        <nav-menu :navArr="navArr"></nav-menu>
+        <nav-menu :navArr="topMainArr" :navType="navType"></nav-menu>
       </div>
     </el-header>
     <el-main>
@@ -13,7 +13,11 @@
   </div>
 </template>
 <script>
+import { mapGetters } from "vuex";
+// 引入导航
 import NavMenu from "@/components/nav/NavMenu";
+// 引入导航类型
+import { navType } from "@/Config/globalConfig.js";
 
 export default {
   name: "mainPage",
@@ -21,21 +25,25 @@ export default {
     NavMenu
   },
   data() {
-    return {};
+    return {
+      navType: navType
+    };
   },
   created() {
-    this.$http
+    this.$Http
       .getRequest("/mock/api/user", {
         id: 1
       })
       .then(res => {
         console.log(res);
+        console.log(this.navType);
       });
   },
   computed: {
-    navArr() {
-      return this.$store.getters["auth/getMenu"];
-    }
+    ...mapGetters({
+      topMainArr: "auth/getTopMain",
+      topSubArr: "auth/getTopSub"
+    })
   }
 };
 </script>

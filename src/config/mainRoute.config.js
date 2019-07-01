@@ -9,6 +9,8 @@ const mainRoutes = [
   {
     name: "Home",
     isNavTable: true,
+    position: "top",
+    type: "main",
     meta: {
       title: "首页",
       isAuth: false
@@ -17,6 +19,8 @@ const mainRoutes = [
   {
     name: "About",
     isNavTable: true,
+    position: "top",
+    type: "main",
     meta: {
       title: "About",
       isAuth: true
@@ -25,14 +29,44 @@ const mainRoutes = [
   {
     name: "hold",
     isNavTable: true,
+    position: "top",
+    type: "main",
     meta: {
       title: "hold",
       isAuth: true
-    }
+    },
+    children: [
+      {
+        name: "test",
+        isNavTable: true,
+        meta: {
+          title: "test",
+          isAuth: true
+        }
+      },
+      {
+        name: "test1",
+        isNavTable: false,
+        meta: {
+          title: "test1",
+          isAuth: true
+        }
+      },
+      {
+        name: "test1",
+        isNavTable: false,
+        meta: {
+          title: "test1",
+          isAuth: true
+        }
+      }
+    ]
   },
   {
     name: "earth",
     isNavTable: true,
+    position: "top",
+    type: "main",
     meta: {
       title: "earth",
       isAuth: true
