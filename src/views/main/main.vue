@@ -1,26 +1,11 @@
 <template>
   <div class="main">
-    <el-header>
+    <el-header :height="headHeight">
       <div id="nav">
         <nav-menu :navArr="topMainArr" :navType="navType"></nav-menu>
       </div>
+      <scroll-bar></scroll-bar>
     </el-header>
-    <div class="tag-box">
-      <div>1</div>
-      <div>1</div>
-      <div>1</div>
-      <div>1</div>
-      <div>1</div>
-      <div>1</div>
-      <div>1</div>
-      <div>1</div>
-      <div>1</div>
-      <div>1</div>
-      <div>1</div>
-      <div>1</div>
-      <div>1</div>
-      <div class="mask"></div>
-    </div>
     <el-main>
       <transition name="fade">
         <router-view class="view"></router-view>
@@ -32,17 +17,21 @@
 import { mapGetters } from "vuex";
 // 引入导航
 import NavMenu from "@/components/nav/NavMenu";
+// 引入滑动条
+import ScrollBar from "@/components/scrollBar/scrollBar";
 // 引入导航类型
 import { navType } from "@/Config/globalConfig.js";
 
 export default {
   name: "mainPage",
   components: {
-    NavMenu
+    NavMenu,
+    ScrollBar
   },
   data() {
     return {
-      navType: navType
+      navType: navType,
+      headHeight: "120px"
     };
   },
   created() {
@@ -66,46 +55,9 @@ export default {
 
 <style lang="less" scoped>
 #nav {
-  margin-bottom: 30px;
+  margin-bottom: 0px;
 }
 .view {
   background: #fff;
-}
-.tag-box {
-  width: 100%;
-  height: 30px;
-  border-bottom: 1px solid #ccc;
-  display: flex;
-  flex-direction: row;
-  overflow: hidden;
-  overflow-x: scroll;
-  white-space: nowrap;
-  position: absolute;
-  z-index: -1;
-  .mask {
-    width: 500px;
-    height: 600px;
-    position: absolute;
-    top: 10px;
-    left: 0;
-    background: #f11;
-  }
-  div {
-    flex-shrink: 0;
-    width: 300px;
-    height: 30px;
-    flex-basis: 300px;
-    // display: inline-block;
-  }
-}
-.tag-box:after {
-  display: block;
-  content: " ";
-  width: 100%;
-  height: 600px;
-  position: absolute;
-  top: 10px;
-  left: 0;
-  background: #f11;
 }
 </style>
