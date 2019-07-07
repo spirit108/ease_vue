@@ -3,7 +3,7 @@
     {
       "name": "Child",
       "isNavTable": true,
-      "position": "top",
+      "position": "aside",
       "type": "main",
       "meta": {
         "title": "一级菜单"

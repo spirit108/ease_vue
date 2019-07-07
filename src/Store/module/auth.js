@@ -4,7 +4,7 @@
 export default {
   namespaced: true, // 模块命名空间，勿动
   state: {
-    isAuth: false,
+    isAuth: true,
     user: null,
     topMain: "",
     topSub: "",

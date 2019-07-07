@@ -1,8 +1,19 @@
 .theme(@bgcolor: #f8f8f8, @fcolor: #333, @primaryColor: #4981f2) {
   background: @bgcolor;
+  .el-aside {
+    background: #fff;
+    color: #333;
+    border-right: 1px solid rgba(200, 200, 200, 0.3);
+    .child-menu-title {
+      color: #333;
+    }
+  }
   .el-header {
     color: @fcolor;
     background: #fff;
+    .child-menu-wrap {
+      background: #fff;
+    }
   }
   .el-button--primary {
     background: #4981f2;

@@ -9,8 +9,9 @@ const mainRoutes = [
   {
     name: "Home",
     isNavTable: true,
-    position: "top",
+    position: "aside",
     type: "main",
+    icon: "",
     meta: {
       title: "首页",
       isAuth: false
@@ -29,7 +30,7 @@ const mainRoutes = [
   {
     name: "hold",
     isNavTable: true,
-    position: "top",
+    position: "aside",
     type: "main",
     meta: {
       title: "hold",

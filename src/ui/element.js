@@ -68,9 +68,9 @@ import {
   // Cascader,
   // ColorPicker,
   // Transfer,
-  // Container,
+  Container,
   Header,
-  // Aside,
+  Aside,
   Main,
   // Footer,
   // Loading,
@@ -138,9 +138,9 @@ Vue.use(Button);
 // Vue.use(CollapseItem);
 // Vue.use(Cascader);
 // Vue.use(ColorPicker);
-// Vue.use(Container);
+Vue.use(Container);
 Vue.use(Header);
-// Vue.use(Aside);
+Vue.use(Aside);
 Vue.use(Main);
 // Vue.use(Footer);
 // Vue.use(Loading.directive);
