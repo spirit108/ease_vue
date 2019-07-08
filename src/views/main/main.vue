@@ -6,7 +6,8 @@
       </div>
     </el-header>
     <el-container>
-      <el-aside width="200px">
+      <el-aside width="200px" v-if="isSide">
+        <div class="mask" @click="isSide = false"></div>
         <aside-nav :asideNavArr="asideMainArr"></aside-nav>
       </el-aside>
       <el-main>
@@ -58,7 +59,8 @@ export default {
     return {
       navType: navType,
       headHeight: "60px",
-      scrollBallWidth: 12000
+      scrollBallWidth: 1200,
+      isSide: true
     };
   },
   created() {
@@ -101,20 +103,21 @@ export default {
   min-height: 855px;
   border-radius: 0 0 4px 0;
   box-shadow: 0 0 5px #999;
+  .mask {
+    display: none;
+  }
 }
 .el-main {
   padding: 0;
   background: #f8f8f8;
   .scroll-bar-row {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
+    white-space: nowrap;
+    display: inline-flex;
     height: 30px;
     background: #fff;
     overflow: hidden;
     padding: 0 20px;
     .scroll-bar-item {
-      flex-shrink: 0;
       width: 100px;
       height: 30px;
       // flex-basis: 100px;
@@ -128,6 +131,26 @@ export default {
     margin: 10px 20px;
     border-radius: 4px;
     box-shadow: 0 0 5px #888;
+  }
+}
+@media screen and (max-width: 875px) {
+  .el-aside {
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 199;
+    height: 100%;
+    .mask {
+      display: block;
+      content: " ";
+      position: fixed;
+      top: 0;
+      left: 200px;
+      width: 100%;
+      height: 100%;
+      z-index: -2;
+      background: rgba(0, 0, 0, 0.2);
+    }
   }
 }
 </style>
