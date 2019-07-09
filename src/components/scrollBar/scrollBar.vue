@@ -32,5 +32,6 @@ export default {
   height: 30px;
   overflow: hidden;
   box-shadow: 0px 0px 6px #999;
+  text-align: left;
 }
 </style>
