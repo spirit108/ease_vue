@@ -16,7 +16,6 @@ if (process.env.NODE_ENV == "development" || process.env.NODE_ENV == "dev") {
 }
 const _import = require("./import-" + loadPath);
 let routerFlag = false;
-let routerArr = [];
 /**
  * 生成路由
  * @param {*} list 菜单列表
@@ -35,9 +34,7 @@ function createRouterMenuFn(list, file = "/") {
       );
       createRouterMenuFn(val.children, file + val.name + "/");
     }
-    let obj = Object.assign(val);
-    // obj.component = "";
-    routerArr.push(obj);
+    return true;
   });
 }
 globalRoutes[0].children = globalRoutes[0].children.concat(mainRoutes);
