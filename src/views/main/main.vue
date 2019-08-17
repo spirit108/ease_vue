@@ -11,25 +11,8 @@
         <aside-nav :asideNavArr="asideMainArr"></aside-nav>
       </el-aside>
       <el-main>
-        <scroll-bar>
-          <template slot="scroll-bar-content">
-            <div
-              class="scroll-bar-content scroll-bar-row"
-              :style="{ width: scrollBallWidth + 'px' }"
-            >
-              <div class="scroll-bar-item">1</div>
-              <div class="scroll-bar-item">2</div>
-              <div class="scroll-bar-item">3</div>
-              <div class="scroll-bar-item">4</div>
-              <div class="scroll-bar-item">5</div>
-              <div class="scroll-bar-item">6</div>
-              <div class="scroll-bar-item">7</div>
-              <div class="scroll-bar-item">8</div>
-              <div class="scroll-bar-item">9</div>
-              <div class="scroll-bar-item">10</div>
-            </div>
-          </template>
-        </scroll-bar>
+        <!-- tagView -->
+        <scroll-bar></scroll-bar>
         <transition name="fade" mode="out-in">
           <router-view class="view"></router-view>
         </transition>
@@ -46,7 +29,7 @@ import AsideNav from "@/components/AsideNav/AsideNav";
 // 引入滑动条
 import ScrollBar from "@/components/scrollBar/scrollBar";
 // 引入导航类型
-import { navType } from "@/Config/globalConfig.js";
+import { navType } from "@/config/globalConfig.js";
 
 export default {
   name: "mainPage",
@@ -59,7 +42,6 @@ export default {
     return {
       navType: navType,
       headHeight: "60px",
-      scrollBallWidth: 1200,
       isSide: true
     };
   },
@@ -110,21 +92,6 @@ export default {
 .el-main {
   padding: 0;
   background: #f8f8f8;
-  .scroll-bar-row {
-    white-space: nowrap;
-    display: inline-flex;
-    height: 30px;
-    background: #fff;
-    overflow: hidden;
-    padding: 0 20px;
-    .scroll-bar-item {
-      width: 100px;
-      height: 30px;
-      // flex-basis: 100px;
-      background: #888;
-      margin-right: 20px;
-    }
-  }
   .view {
     background: #fff;
     min-height: 855px;

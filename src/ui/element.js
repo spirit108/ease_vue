@@ -13,9 +13,9 @@ import {
   // Pagination,
   // Dialog,
   // Autocomplete,
-  // Dropdown,
-  // DropdownMenu,
-  // DropdownItem,
+  Dropdown,
+  DropdownMenu,
+  DropdownItem,
   // Menu,
   // Submenu,
   // MenuItem,
@@ -47,7 +47,7 @@ import {
   // FormItem,
   // Tabs,
   // TabPane,
-  // Tag,
+  Tag,
   // Tree,
   // Alert,
   // Slider,
@@ -84,9 +84,9 @@ import "element-ui/lib/theme-chalk/index.css";
 // Vue.use(Pagination);
 // Vue.use(Dialog);
 // Vue.use(Autocomplete);
-// Vue.use(Dropdown);
-// Vue.use(DropdownMenu);
-// Vue.use(DropdownItem);
+Vue.use(Dropdown);
+Vue.use(DropdownMenu);
+Vue.use(DropdownItem);
 // Vue.use(Menu);
 // Vue.use(Submenu);
 // Vue.use(MenuItem);
@@ -118,7 +118,7 @@ Vue.use(Button);
 // Vue.use(FormItem);
 // Vue.use(Tabs);
 // Vue.use(TabPane);
-// Vue.use(Tag);
+Vue.use(Tag);
 // Vue.use(Tree);
 // Vue.use(Alert);
 // Vue.use(Slider);

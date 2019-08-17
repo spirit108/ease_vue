@@ -2,8 +2,8 @@ import Vue from "vue";
 import App from "./App.vue";
 import router from "./Router/router";
 import store from "./Store/store";
-import "./Ui/element";
-import Http from "./Http/http";
+import "./ui/element";
+import Http from "./http/http";
 // 404页面
 const notFound = {
   path: "*",

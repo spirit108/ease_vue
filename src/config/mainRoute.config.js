@@ -14,7 +14,7 @@ const mainRoutes = [
     icon: "",
     meta: {
       title: "首页",
-      isAuth: false
+      isAuth: true
     }
   },
   {
@@ -24,7 +24,7 @@ const mainRoutes = [
     type: "main",
     meta: {
       title: "About",
-      isAuth: true
+      isAuth: false
     }
   },
   {
@@ -70,7 +70,7 @@ const mainRoutes = [
     type: "main",
     meta: {
       title: "earth",
-      isAuth: true
+      isAuth: false
     }
   }
 ];

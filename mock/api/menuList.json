@@ -6,28 +6,32 @@
       "position": "aside",
       "type": "main",
       "meta": {
-        "title": "一级菜单"
+        "title": "一级菜单",
+        "isAuth": true
       },
       "children": [
         {
           "name": "childA",
           "isNavTable": true,
           "meta": {
-            "title": "一级菜单"
+            "title": "一级菜单",
+            "isAuth": true
           },
           "children": [
             {
               "name": "childA1",
               "isNavTable": true,
               "meta": {
-                "title": "二级子菜单A"
+                "title": "二级子菜单A",
+                "isAuth": true
               }
             },
             {
               "name": "childA2",
               "isNavTable": true,
               "meta": {
-                "title": "二级子菜单B"
+                "title": "二级子菜单B",
+                "isAuth": true
               }
             }
           ]
@@ -36,7 +40,8 @@
           "name": "childB",
           "isNavTable": true,
           "meta": {
-            "title": "二级子菜单"
+            "title": "二级子菜单",
+            "isAuth": true
           }
         }
       ]

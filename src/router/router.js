@@ -1,20 +1,14 @@
 import Vue from "vue";
 import Router from "vue-router";
 import store from "../Store/store";
-import mainRoutes from "@/Config/mainRoute.config.js";
-import globalRoutes from "@/Config/globalRoute.config.js";
-import http from "@/Http/http";
-import { activeRouter } from "@/Config/globalConfig";
+import mainRoutes from "@/config/mainRoute.config.js";
+import globalRoutes from "@/config/globalRoute.config.js";
+import http from "@/http/http";
+import { activeRouter } from "@/config/globalConfig";
 import cloneDeep from "lodash/cloneDeep";
 
 Vue.use(Router);
 
-// 开发环境不使用懒加载, 因为懒加载页面太多的话会造成webpack热更新太慢, 所以只有生产环境使用懒加载
-let loadPath = "production";
-if (process.env.NODE_ENV == "development" || process.env.NODE_ENV == "dev") {
-  loadPath = "development";
-}
-const _import = require("./import-" + loadPath);
 let routerFlag = false;
 /**
  * 生成路由
@@ -26,7 +20,7 @@ function createRouterMenuFn(list, file = "/") {
     val.path = (file + val.name).replace("main/", "");
     val.path = val.path.replace("/main", "/");
     val.file = file + val.name + "/" + val.name;
-    val.component = _import(val.file);
+    val.component = () => import("@/views" + val.file + ".vue");
     if (val.children && val.children.length) {
       val.redirect = (file + val.name + "/" + val.children[0].name).replace(
         "/main",
@@ -78,6 +72,13 @@ const RouterObj = new Router({
 RouterObj.beforeEach((to, from, next) => {
   let isLogin = store.getters["auth/getAuthTagFn"];
   if (to.meta.isAuth) {
+    let _to = {
+      path: to.path,
+      title: to.meta.title,
+      active: false
+    };
+    store.dispatch("page/setTagViewFn", _to);
+    store.dispatch("page/setTagActiveFn", to.path);
     if (isLogin) {
       next();
     } else {
