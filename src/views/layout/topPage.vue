@@ -1,0 +1,118 @@
+<template>
+  <div class="main">
+    <el-header :height="headHeight">
+      <div id="nav">
+        <nav-menu :navArr="topMainArr" :navType="navType"></nav-menu>
+      </div>
+    </el-header>
+    <el-container>
+      <el-main>
+        <!-- tagView -->
+        <scroll-bar></scroll-bar>
+        <transition name="fade" mode="out-in">
+          <router-view class="view"></router-view>
+        </transition>
+      </el-main>
+    </el-container>
+  </div>
+</template>
+<script>
+import { mapGetters } from "vuex";
+// 引入导航
+import NavMenu from "@/components/nav/NavMenu";
+// 引入侧边导航
+import AsideNav from "@/components/AsideNav/AsideNav";
+// 引入滑动条
+import ScrollBar from "@/components/scrollBar/scrollBar";
+// 引入导航类型
+import { navType } from "@/config/globalConfig.js";
+
+export default {
+  name: "mainPage",
+  components: {
+    NavMenu,
+    ScrollBar,
+    AsideNav
+  },
+  data() {
+    return {
+      navType: navType,
+      headHeight: "60px"
+    };
+  },
+  created() {
+    this.$Http
+      .getRequest("/mock/api/user", {
+        id: 1
+      })
+      .then(res => {
+        console.log(res);
+        console.log(this.navType);
+      });
+  },
+  computed: {
+    ...mapGetters({
+      topMainArr: "auth/getTopMain",
+      topSubArr: "auth/getTopSub",
+      asideMainArr: "auth/getAsideMain"
+    })
+  }
+};
+</script>
+
+<style lang="less" scoped>
+.main {
+  height: 100%;
+}
+#nav {
+  margin-bottom: 0px;
+}
+.el-header {
+  padding: 0;
+  box-shadow: 0 0 3px #eee;
+  position: relative;
+  z-index: 10;
+}
+.el-container {
+  min-height: 910px;
+}
+.el-aside {
+  min-height: 855px;
+  border-radius: 0 0 4px 0;
+  box-shadow: 0 0 5px #999;
+  .mask {
+    display: none;
+  }
+}
+.el-main {
+  padding: 0;
+  background: #f8f8f8;
+  .view {
+    background: #fff;
+    min-height: 855px;
+    margin: 10px 20px;
+    border-radius: 4px;
+    box-shadow: 0 0 5px #888;
+  }
+}
+@media screen and (max-width: 875px) {
+  .el-aside {
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 199;
+    height: 100%;
+    .mask {
+      display: block;
+      content: " ";
+      position: fixed;
+      top: 0;
+      left: 200px;
+      width: 100%;
+      height: 100%;
+      z-index: -2;
+      background: rgba(0, 0, 0, 0.2);
+    }
+  }
+}
+</style>

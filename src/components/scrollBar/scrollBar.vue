@@ -69,8 +69,7 @@ export default {
         this.tagViews.splice(i, 1);
         this.$router.replace(this.tagViews[this.tagViews.length - 1].path);
       }
-    },
-
+    }
   }
 };
 </script>

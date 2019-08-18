@@ -12,6 +12,7 @@ const mainRoutes = [
     position: "aside",
     type: "main",
     icon: "",
+    url: "/main/Home",
     meta: {
       title: "首页",
       isAuth: true
@@ -22,6 +23,7 @@ const mainRoutes = [
     isNavTable: true,
     position: "top",
     type: "main",
+    url: "/main/About",
     meta: {
       title: "About",
       isAuth: false

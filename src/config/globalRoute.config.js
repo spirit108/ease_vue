@@ -13,12 +13,14 @@ const globalRoutes = [
   },
   {
     name: "404",
+    url: "/404",
     meta: {
       title: "404"
     }
   },
   {
     name: "login",
+    url: "/login",
     meta: {
       title: "login"
     }
