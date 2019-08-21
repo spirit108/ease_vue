@@ -10,29 +10,50 @@ import cloneDeep from "lodash/cloneDeep";
 Vue.use(Router);
 
 let routerFlag = false;
+
+// 生成动态路由
+function createRouterMenuFn(menu, index = 1) {
+  console.log(menu);
+  menu.forEach(val => {
+    console.log(val.url);
+    val.path = val.url;
+    console.log(val);
+    let urlArr = val.url.split("/");
+    let _name = urlArr[urlArr.length - 1];
+    val.title = _name;
+    val.name = _name;
+    // val.component = () => import(`@/main${val.url}/${_name}`);
+    val.component = () => import(`@/views${val.url}/${_name}`);
+    if (val.list && val.list.length) {
+      val.redirect = val.list[0].url;
+      val.children = val.list;
+      createRouterMenuFn(val.children, ++index);
+    }
+  });
+}
 /**
  * 生成路由
  * @param {*} list 菜单列表
  * @param {*} file 初始路径
  */
-function createRouterMenuFn(list, file = "/") {
-  list.forEach(val => {
-    val.path = (file + val.name).replace("main/", "");
-    val.path = val.path.replace("/main", "/");
-    val.file = file + val.name + "/" + val.name;
-    val.component = () => import("@/views" + val.file + ".vue");
-    if (val.children && val.children.length) {
-      val.redirect = (file + val.name + "/" + val.children[0].name).replace(
-        "/main",
-        ""
-      );
-      createRouterMenuFn(val.children, file + val.name + "/");
-    }
-    return true;
-  });
-}
-globalRoutes[0].children = globalRoutes[0].children.concat(mainRoutes);
-let routers = globalRoutes;
+// function createRouterMenuFn(list, file = "/") {
+//   list.forEach(val => {
+//     val.path = (file + val.name).replace("main/", "");
+//     val.path = val.path.replace("/main", "/");
+//     val.file = file + val.name + "/" + val.name;
+//     val.component = () => import("@/views" + val.file + ".vue");
+//     if (val.children && val.children.length) {
+//       val.redirect = (file + val.name + "/" + val.children[0].name).replace(
+//         "/main",
+//         ""
+//       );
+//       createRouterMenuFn(val.children, file + val.name + "/");
+//     }
+//     return true;
+//   });
+// }
+
+let routers = globalRoutes.concat(mainRoutes);
 createRouterMenuFn(routers);
 
 /**
@@ -90,28 +111,26 @@ RouterObj.beforeEach((to, from, next) => {
 });
 // 添加动态路由
 RouterObj.afterEach((to, from) => {
-  let _routers = cloneDeep(routers[0]),
-    routerArr = cloneDeep(routers[0]).children,
-    isLogin = store.getters["auth/getAuthTagFn"];
+  let isLogin = store.getters["auth/getAuthTagFn"];
   document.title = to.meta.title;
   if (isLogin) {
     if (activeRouter) {
       if (!routerFlag && from.path == "/") {
-        http.getRequest("/mock/api/menuList", "", true).then(res => {
-          _routers.children = res.menuList;
-          createRouterMenuFn([_routers]);
-          RouterObj.addRoutes([_routers]); // 添加动态路由
-          routerArr = routerArr.concat(_routers.children);
-          filterRouterMenuFn(routerArr); // 筛选动态路由中菜单路由
-          routerFlag = true;
-        });
+        // http.getRequest("/mock/api/menuList", "", true).then(res => {
+        //   _routers.children = res.menuList;
+        //   createRouterMenuFn([_routers]);
+        //   RouterObj.addRoutes([_routers]); // 添加动态路由
+        //   routerArr = routerArr.concat(_routers.children);
+        //   filterRouterMenuFn(routerArr); // 筛选动态路由中菜单路由
+        //   routerFlag = true;
+        // });
       }
     } else {
-      filterRouterMenuFn(routerArr);
+      // filterRouterMenuFn(routerArr);
     }
   } else {
     // 没有登陆
-    filterRouterMenuFn(routerArr);
+    // filterRouterMenuFn(routerArr);
   }
 });
 export default RouterObj;

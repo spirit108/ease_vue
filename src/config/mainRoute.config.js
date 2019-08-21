@@ -34,6 +34,7 @@ const mainRoutes = [
     isNavTable: true,
     position: "aside",
     type: "main",
+    url: "/main/hold",
     meta: {
       title: "hold",
       isAuth: true
@@ -42,6 +43,7 @@ const mainRoutes = [
       {
         name: "test",
         isNavTable: true,
+        url: "/main/hold/test",
         meta: {
           title: "test",
           isAuth: true
@@ -50,14 +52,7 @@ const mainRoutes = [
       {
         name: "test1",
         isNavTable: false,
-        meta: {
-          title: "test1",
-          isAuth: true
-        }
-      },
-      {
-        name: "test1",
-        isNavTable: false,
+        url: "/main/hold/test1",
         meta: {
           title: "test1",
           isAuth: true
@@ -70,6 +65,7 @@ const mainRoutes = [
     isNavTable: true,
     position: "top",
     type: "main",
+    url: "/main/earth",
     meta: {
       title: "earth",
       isAuth: false

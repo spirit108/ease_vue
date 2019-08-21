@@ -79,7 +79,7 @@ export default {
   z-index: 10;
 }
 .el-container {
-  min-height: 910px;
+  min-height: 850px;
 }
 .el-aside {
   min-height: 855px;

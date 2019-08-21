@@ -5,6 +5,7 @@
       "isNavTable": true,
       "position": "aside",
       "type": "main",
+      "url": "/main/Child",
       "meta": {
         "title": "一级菜单",
         "isAuth": true
@@ -13,6 +14,7 @@
         {
           "name": "childA",
           "isNavTable": true,
+          "url": "/main/Child/childA",
           "meta": {
             "title": "一级菜单",
             "isAuth": true
@@ -21,6 +23,7 @@
             {
               "name": "childA1",
               "isNavTable": true,
+              "url": "/main/Child/childA1",
               "meta": {
                 "title": "二级子菜单A",
                 "isAuth": true
@@ -29,6 +32,7 @@
             {
               "name": "childA2",
               "isNavTable": true,
+              "url": "/main/Child/childA2",
               "meta": {
                 "title": "二级子菜单B",
                 "isAuth": true
@@ -39,6 +43,7 @@
         {
           "name": "childB",
           "isNavTable": true,
+          "url": "/main/childB",
           "meta": {
             "title": "二级子菜单",
             "isAuth": true
