@@ -5,7 +5,6 @@ import mainRoutes from "@/config/mainRoute.config.js";
 import globalRoutes from "@/config/globalRoute.config.js";
 import http from "@/http/http";
 import { activeRouter } from "@/config/globalConfig";
-import cloneDeep from "lodash/cloneDeep";
 
 Vue.use(Router);
 
@@ -13,20 +12,15 @@ let routerFlag = false;
 
 // 生成动态路由
 function createRouterMenuFn(menu, index = 1) {
-  console.log(menu);
   menu.forEach(val => {
-    console.log(val.url);
-    val.path = val.url;
-    console.log(val);
+    val.path = val.url.replace("/main", "");
     let urlArr = val.url.split("/");
     let _name = urlArr[urlArr.length - 1];
     val.title = _name;
     val.name = _name;
-    // val.component = () => import(`@/main${val.url}/${_name}`);
     val.component = () => import(`@/views${val.url}/${_name}`);
-    if (val.list && val.list.length) {
-      val.redirect = val.list[0].url;
-      val.children = val.list;
+    if (val.children && val.children.length) {
+      val.redirect = val.children[0].url.replace("/main", "");
       createRouterMenuFn(val.children, ++index);
     }
   });
@@ -53,8 +47,10 @@ function createRouterMenuFn(menu, index = 1) {
 //   });
 // }
 
-let routers = globalRoutes.concat(mainRoutes);
-createRouterMenuFn(routers);
+globalRoutes[0].children = globalRoutes[0].children.concat(mainRoutes);
+let routers = globalRoutes;
+createRouterMenuFn(globalRoutes);
+console.log(routers);
 
 /**
  * 筛选出导航路由
@@ -92,6 +88,8 @@ const RouterObj = new Router({
 // 权限验证
 RouterObj.beforeEach((to, from, next) => {
   let isLogin = store.getters["auth/getAuthTagFn"];
+  console.log(to.meta.layout)
+  store.dispatch("page/setViewLayout", to.meta.layout);
   if (to.meta.isAuth) {
     let _to = {
       path: to.path,
@@ -112,18 +110,20 @@ RouterObj.beforeEach((to, from, next) => {
 // 添加动态路由
 RouterObj.afterEach((to, from) => {
   let isLogin = store.getters["auth/getAuthTagFn"];
+  let _routers = routers[0];
+  let routerArr = routers[0].children;
   document.title = to.meta.title;
   if (isLogin) {
     if (activeRouter) {
       if (!routerFlag && from.path == "/") {
-        // http.getRequest("/mock/api/menuList", "", true).then(res => {
-        //   _routers.children = res.menuList;
-        //   createRouterMenuFn([_routers]);
-        //   RouterObj.addRoutes([_routers]); // 添加动态路由
-        //   routerArr = routerArr.concat(_routers.children);
-        //   filterRouterMenuFn(routerArr); // 筛选动态路由中菜单路由
-        //   routerFlag = true;
-        // });
+        http.getRequest("/mock/api/menuList", "", true).then(res => {
+          _routers.children = res.menuList;
+          createRouterMenuFn([_routers]);
+          RouterObj.addRoutes([_routers]); // 添加动态路由
+          routerArr = routerArr.concat(_routers.children);
+          filterRouterMenuFn(routerArr); // 筛选动态路由中菜单路由
+          routerFlag = true;
+        });
       }
     } else {
       // filterRouterMenuFn(routerArr);

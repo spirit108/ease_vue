@@ -107,6 +107,9 @@ export default {
       width: 100px;
       height: 30px;
       margin-right: 20px;
+      a {
+        color: #333;
+      }
       .active {
         background: #64bf0a;
         a {

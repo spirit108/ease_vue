@@ -8,7 +8,8 @@
       "url": "/main/Child",
       "meta": {
         "title": "一级菜单",
-        "isAuth": true
+        "isAuth": true,
+        "layout": "topAsidePage"
       },
       "children": [
         {
@@ -17,25 +18,28 @@
           "url": "/main/Child/childA",
           "meta": {
             "title": "一级菜单",
-            "isAuth": true
+            "isAuth": true,
+            "layout": "topAsidePage"
           },
           "children": [
             {
               "name": "childA1",
               "isNavTable": true,
-              "url": "/main/Child/childA1",
+              "url": "/main/Child/childA/childA1",
               "meta": {
                 "title": "二级子菜单A",
-                "isAuth": true
+                "isAuth": true,
+                "layout": "topAsidePage"
               }
             },
             {
               "name": "childA2",
               "isNavTable": true,
-              "url": "/main/Child/childA2",
+              "url": "/main/Child/childA/childA2",
               "meta": {
                 "title": "二级子菜单B",
-                "isAuth": true
+                "isAuth": true,
+                "layout": "topAsidePage"
               }
             }
           ]
@@ -46,7 +50,8 @@
           "url": "/main/childB",
           "meta": {
             "title": "二级子菜单",
-            "isAuth": true
+            "isAuth": true,
+            "layout": "topAsidePage"
           }
         }
       ]

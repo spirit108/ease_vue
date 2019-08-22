@@ -4,7 +4,8 @@
 export default {
   namespaced: true, // 模块命名空间，勿动
   state: {
-    tagViews: []
+    tagViews: [],
+    viewLayout: ""
   },
   mutations: {
     setTagViewFn(state, val) {
@@ -20,6 +21,9 @@ export default {
           element.active = true;
         }
       });
+    },
+    setViewLayout(state, val) {
+      state.viewLayout = val;
     }
   },
   actions: {
@@ -30,12 +34,20 @@ export default {
     // 设置当前页面
     setTagActiveFn({ commit }, val) {
       commit("setTagActiveFn", val);
+    },
+    // 设置当前页面布局
+    setViewLayout({ commit }, val) {
+      commit("setViewLayout", val);
     }
   },
   getters: {
     // 获得登陆标志
     getTagViewFn(state) {
       return state.tagViews;
+    },
+    // 获得页面布局
+    getViewLayout(state) {
+      return state.viewLayout;
     }
   }
 };

@@ -9,13 +9,14 @@ const mainRoutes = [
   {
     name: "Home",
     isNavTable: true,
-    position: "aside",
+    position: "top",
     type: "main",
     icon: "",
     url: "/main/Home",
     meta: {
       title: "首页",
-      isAuth: true
+      isAuth: false,
+      layout: "topPage"
     }
   },
   {
@@ -26,18 +27,20 @@ const mainRoutes = [
     url: "/main/About",
     meta: {
       title: "About",
-      isAuth: false
+      isAuth: false,
+      layout: "topPage"
     }
   },
   {
     name: "hold",
     isNavTable: true,
-    position: "aside",
+    position: "top",
     type: "main",
     url: "/main/hold",
     meta: {
       title: "hold",
-      isAuth: true
+      isAuth: false,
+      layout: "topPage"
     },
     children: [
       {
@@ -46,7 +49,8 @@ const mainRoutes = [
         url: "/main/hold/test",
         meta: {
           title: "test",
-          isAuth: true
+          isAuth: false,
+          layout: "topPage"
         }
       },
       {
@@ -55,7 +59,8 @@ const mainRoutes = [
         url: "/main/hold/test1",
         meta: {
           title: "test1",
-          isAuth: true
+          isAuth: false,
+          layout: "topPage"
         }
       }
     ]
@@ -68,7 +73,8 @@ const mainRoutes = [
     url: "/main/earth",
     meta: {
       title: "earth",
-      isAuth: false
+      isAuth: false,
+      layout: "topPage"
     }
   }
 ];

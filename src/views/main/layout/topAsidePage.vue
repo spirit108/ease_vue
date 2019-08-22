@@ -32,7 +32,7 @@ import ScrollBar from "@/components/scrollBar/scrollBar";
 import { navType } from "@/config/globalConfig.js";
 
 export default {
-  name: "mainPage",
+  name: "topAsidePage",
   components: {
     NavMenu,
     ScrollBar,

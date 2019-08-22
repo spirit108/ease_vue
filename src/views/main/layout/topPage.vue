@@ -7,8 +7,6 @@
     </el-header>
     <el-container>
       <el-main>
-        <!-- tagView -->
-        <scroll-bar></scroll-bar>
         <transition name="fade" mode="out-in">
           <router-view class="view"></router-view>
         </transition>
@@ -20,19 +18,17 @@
 import { mapGetters } from "vuex";
 // 引入导航
 import NavMenu from "@/components/nav/NavMenu";
-// 引入侧边导航
-import AsideNav from "@/components/AsideNav/AsideNav";
-// 引入滑动条
-import ScrollBar from "@/components/scrollBar/scrollBar";
+// // 引入侧边导航
+// import AsideNav from "@/components/AsideNav/AsideNav";
+// // 引入滑动条
+// import ScrollBar from "@/components/scrollBar/scrollBar";
 // 引入导航类型
 import { navType } from "@/config/globalConfig.js";
 
 export default {
-  name: "mainPage",
+  name: "topPage",
   components: {
-    NavMenu,
-    ScrollBar,
-    AsideNav
+    NavMenu
   },
   data() {
     return {
@@ -73,24 +69,12 @@ export default {
   position: relative;
   z-index: 10;
 }
-.el-container {
-  min-height: 910px;
-}
-.el-aside {
-  min-height: 855px;
-  border-radius: 0 0 4px 0;
-  box-shadow: 0 0 5px #999;
-  .mask {
-    display: none;
-  }
-}
 .el-main {
   padding: 0;
   background: #f8f8f8;
   .view {
     background: #fff;
-    min-height: 855px;
-    margin: 10px 20px;
+    min-height: 700px;
     border-radius: 4px;
     box-shadow: 0 0 5px #888;
   }

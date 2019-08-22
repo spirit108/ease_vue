@@ -4,6 +4,14 @@
  */
 const globalRoutes = [
   {
+    name: "main",
+    url: "/main",
+    meta: {
+      title: "main"
+    },
+    children: []
+  },
+  {
     name: "404",
     url: "/404",
     meta: {
