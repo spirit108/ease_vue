@@ -47,7 +47,7 @@
         {
           "name": "childB",
           "isNavTable": true,
-          "url": "/main/childB",
+          "url": "/main/Child/childB",
           "meta": {
             "title": "二级子菜单",
             "isAuth": true,

@@ -3,9 +3,7 @@
     <topAsidePage
       v-if="$store.getters['page/getViewLayout'] == 'topAsidePage'"
     />
-    <topPage
-      v-else-if="$store.getters['page/getViewLayout'] == 'topPage'"
-    />
+    <topPage v-else-if="$store.getters['page/getViewLayout'] == 'topPage'" />
   </div>
 </template>
 <script>

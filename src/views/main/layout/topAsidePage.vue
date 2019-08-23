@@ -2,7 +2,28 @@
   <div class="main">
     <el-header :height="headHeight">
       <div id="nav">
-        <nav-menu :navArr="topMainArr" :navType="navType"></nav-menu>
+        <nav-menu>
+          <div slot="nav-icon" class="web-logo" @click="navToHomeFn">
+            <img src="@/assets/logo.png" alt="logo" />
+            <div>
+              <h1>Ease-vue</h1>
+              <p>基于vue、element-ui的前端解决方案</p>
+            </div>
+          </div>
+          <div slot="nav-sub">
+            <el-dropdown @command="handleCommand">
+              <span class="el-dropdown-link">
+                admin<i class="el-icon-arrow-down el-icon--right"></i>
+              </span>
+              <el-dropdown-menu slot="dropdown">
+                <el-dropdown-item command="navToAdminHomeFn">
+                  管理页面
+                </el-dropdown-item>
+                <el-dropdown-item>退出</el-dropdown-item>
+              </el-dropdown-menu>
+            </el-dropdown>
+          </div>
+        </nav-menu>
       </div>
     </el-header>
     <el-container>
@@ -28,8 +49,6 @@ import NavMenu from "@/components/nav/NavMenu";
 import AsideNav from "@/components/AsideNav/AsideNav";
 // 引入滑动条
 import ScrollBar from "@/components/scrollBar/scrollBar";
-// 引入导航类型
-import { navType } from "@/config/globalConfig.js";
 
 export default {
   name: "topAsidePage",
@@ -40,7 +59,6 @@ export default {
   },
   data() {
     return {
-      navType: navType,
       headHeight: "60px"
     };
   },
@@ -57,9 +75,22 @@ export default {
   computed: {
     ...mapGetters({
       topMainArr: "auth/getTopMain",
-      topSubArr: "auth/getTopSub",
       asideMainArr: "auth/getAsideMain"
     })
+  },
+  methods: {
+    // 下拉菜单触发事件
+    handleCommand(val) {
+      this[val]();
+    },
+    // 跳转用户管理首页
+    navToAdminHomeFn() {
+      this.$router.push(this.asideMainArr[0].path);
+    },
+    // 跳转首页
+    navToHomeFn() {
+      this.$router.push("/");
+    }
   }
 };
 </script>
@@ -70,6 +101,7 @@ export default {
 }
 #nav {
   margin-bottom: 0px;
+  padding: 0 30px;
 }
 .el-header {
   padding: 0;

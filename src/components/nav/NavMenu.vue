@@ -1,50 +1,48 @@
 <template>
-  <div class="nav">
-    <slot name="nav-icon"></slot>
-    <ul
-      class="nav-main"
-      @click="selectNavFn"
-      :class="{ 'nav-type': navType !== 'normal' }"
-    >
-      <li
-        class="nav-item"
-        :class="{ 'nav-active': i == isNav }"
-        v-for="(item, i) in navArr"
-        :key="i"
-      >
-        <div
-          v-if="item.children && item.children.length"
-          @mouseover="showChildMenuFn(i)"
-          @mouseout="closeChildMenuFn"
+  <div class="top-nav">
+    <div class="top-nav__main" :class="navPosition">
+      <slot name="nav-icon"></slot>
+      <ul class="nav-main" @click="selectNavFn">
+        <li
+          class="nav-item"
+          :class="{ 'nav-active': i == isNav }"
+          v-for="(item, i) in navArr"
+          :key="i"
         >
-          <p class="menu-title">
-            {{ item.meta.title }}
-            <i class="el-icon-caret-bottom"></i>
-          </p>
           <div
-            class="child-menu-wrap"
-            v-if="i == isShow"
-            :data-index="i"
+            v-if="item.children && item.children.length"
             @mouseover="showChildMenuFn(i)"
+            @mouseout="closeChildMenuFn"
           >
-            <child-nav-list
-              :navArr="item.children"
-              :navIndex="i"
-            ></child-nav-list>
+            <p class="menu-title">
+              {{ item.meta.title }}
+              <i class="el-icon-caret-bottom"></i>
+            </p>
+            <div
+              class="child-menu-wrap"
+              v-if="i == isShow"
+              :data-index="i"
+              @mouseover="showChildMenuFn(i)"
+            >
+              <child-nav-list
+                :navArr="item.children"
+                :navIndex="i"
+              ></child-nav-list>
+            </div>
           </div>
-        </div>
-        <div v-else>
-          <router-link
-            class="menu-title link"
-            :to="item.path"
-            :data-index="i"
-            v-if="item.isNavTable"
-          >
-            {{ item.meta.title }}
-          </router-link>
-        </div>
-      </li>
-    </ul>
+          <div v-else>
+            <router-link
+              class="menu-title link"
+              :to="item.path"
+              :data-index="i"
+              v-if="item.isNavTable"
+            >
+              {{ item.meta.title }}
+            </router-link>
+          </div>
+        </li>
+      </ul>
+    </div>
     <slot name="nav-sub"></slot>
   </div>
 </template>
@@ -60,9 +58,9 @@ export default {
         return [];
       }
     },
-    navType: {
+    navPosition: {
       type: String,
-      default: "normal"
+      default: "nav-right"
     }
   },
   data() {
@@ -106,15 +104,28 @@ export default {
 };
 </script>
 <style lang="less">
-.nav {
+.top-nav {
   height: 60px;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
   border-bottom: 1px solid rgba(233, 233, 233, 0.6);
-  .nav-type {
+  .top-nav__main {
+    display: flex;
+    flex-direction: row;
     justify-content: flex-start;
+    align-items: center;
+    .web-logo {
+      height: 60px;
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+      img {
+        width: 60px;
+        height: 60px;
+      }
+    }
   }
 }
 

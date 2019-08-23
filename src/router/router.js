@@ -88,7 +88,6 @@ const RouterObj = new Router({
 // 权限验证
 RouterObj.beforeEach((to, from, next) => {
   let isLogin = store.getters["auth/getAuthTagFn"];
-  console.log(to.meta.layout)
   store.dispatch("page/setViewLayout", to.meta.layout);
   if (to.meta.isAuth) {
     let _to = {
