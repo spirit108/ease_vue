@@ -1,10 +1,6 @@
 <template>
-  <div>
-    <topAsidePage
-      v-if="$store.getters['page/getViewLayout'] == 'topAsidePage'"
-    />
-    <topPage v-else-if="$store.getters['page/getViewLayout'] == 'topPage'" />
-  </div>
+  <topAsidePage v-if="$store.getters['page/getViewLayout'] == 'topAsidePage'" />
+  <topPage v-else-if="$store.getters['page/getViewLayout'] == 'topPage'" />
 </template>
 <script>
 // 引入布局：首部侧边导航

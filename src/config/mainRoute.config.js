@@ -66,13 +66,13 @@ const mainRoutes = [
     ]
   },
   {
-    name: "earth",
+    name: "icon",
     isNavTable: true,
     position: "top",
     type: "main",
-    url: "/main/earth",
+    url: "/main/icon",
     meta: {
-      title: "earth",
+      title: "icon",
       isAuth: false,
       layout: "topPage"
     }

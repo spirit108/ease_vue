@@ -33,6 +33,11 @@
         </transition>
       </el-main>
     </el-container>
+    <footer>
+      <div class="page-footer">
+        Ease-vue@tomz_z
+      </div>
+    </footer>
   </div>
 </template>
 <script>
@@ -101,32 +106,18 @@ export default {
 }
 .el-main {
   padding: 0;
-  background: #f8f8f8;
+  background: #fff;
+  min-height: calc(100vh - 160px);
+  box-shadow: 0 0 3px #eee;
   .view {
-    background: #fff;
-    min-height: 700px;
-    border-radius: 4px;
-    box-shadow: 0 0 5px #888;
+    padding: 20px;
+    box-sizing: border-box;
   }
 }
-@media screen and (max-width: 875px) {
-  .el-aside {
-    position: fixed;
-    left: 0;
-    top: 0;
-    z-index: 199;
-    height: 100%;
-    .mask {
-      display: block;
-      content: " ";
-      position: fixed;
-      top: 0;
-      left: 200px;
-      width: 100%;
-      height: 100%;
-      z-index: -2;
-      background: rgba(0, 0, 0, 0.2);
-    }
-  }
+.page-footer {
+  height: 100px;
+  width: 100%;
+  background: #fff;
+  line-height: 100px;
 }
 </style>

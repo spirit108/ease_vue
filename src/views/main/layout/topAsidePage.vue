@@ -110,10 +110,10 @@ export default {
   z-index: 10;
 }
 .el-container {
-  min-height: 910px;
+  min-height: calc(100vh - 60px);
 }
 .el-aside {
-  min-height: 855px;
+  min-height: calc(100vh - 60px);
   border-radius: 0 0 4px 0;
   box-shadow: 0 0 5px #999;
   .mask {
@@ -125,8 +125,8 @@ export default {
   background: #f8f8f8;
   .view {
     background: #fff;
-    min-height: 855px;
-    margin: 10px 20px;
+    min-height: calc(100vh - 120px);
+    margin: 15px 20px;
     border-radius: 4px;
     box-shadow: 0 0 5px #888;
   }
