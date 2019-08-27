@@ -108,6 +108,8 @@ export default {
   box-shadow: 0 0 3px #eee;
   position: relative;
   z-index: 10;
+  border: 1px solid #eee;
+  overflow: hidden;
 }
 .el-container {
   min-height: calc(100vh - 60px);

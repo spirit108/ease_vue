@@ -89,6 +89,11 @@ const RouterObj = new Router({
 RouterObj.beforeEach((to, from, next) => {
   let isLogin = store.getters["auth/getAuthTagFn"];
   store.dispatch("page/setViewLayout", to.meta.layout);
+  if (to.path === "/Home") {
+    store.dispatch("page/setFixNav", true);
+  } else {
+    store.dispatch("page/setFixNav", false);
+  }
   if (to.meta.isAuth) {
     let _to = {
       path: to.path,

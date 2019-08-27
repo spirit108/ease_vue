@@ -110,7 +110,6 @@ export default {
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  border-bottom: 1px solid rgba(233, 233, 233, 0.6);
   .top-nav__main {
     display: flex;
     flex-direction: row;

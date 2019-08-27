@@ -5,7 +5,9 @@ export default {
   namespaced: true, // 模块命名空间，勿动
   state: {
     tagViews: [],
-    viewLayout: ""
+    viewLayout: "",
+    isFixNav: false,
+    isNavBg: false
   },
   mutations: {
     setTagViewFn(state, val) {
@@ -24,6 +26,12 @@ export default {
     },
     setViewLayout(state, val) {
       state.viewLayout = val;
+    },
+    setFixNav(state, val) {
+      state.isFixNav = val;
+    },
+    setNavBg(state, val) {
+      state.isNavBg = val;
     }
   },
   actions: {
@@ -38,6 +46,14 @@ export default {
     // 设置当前页面布局
     setViewLayout({ commit }, val) {
       commit("setViewLayout", val);
+    },
+    // 设置上方导航时候固定
+    setFixNav({ commit }, val) {
+      commit("setFixNav", val);
+    },
+    // 设置上方导航背景
+    setNavBg({ commit }, val) {
+      commit("setNavBg", val);
     }
   },
   getters: {
@@ -48,6 +64,14 @@ export default {
     // 获得页面布局
     getViewLayout(state) {
       return state.viewLayout;
+    },
+    // 获得上方导航条是否可固定
+    getFixNav(state) {
+      return state.isFixNav;
+    },
+    // 获得上方导航条是否可固定
+    getNavBg(state) {
+      return state.isNavBg;
     }
   }
 };

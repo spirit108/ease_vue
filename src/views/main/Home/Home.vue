@@ -1,164 +1,122 @@
 <template>
-  <div class="home">
-    <div>{{ $store.state.auth.token }}</div>
-    <!-- <div class="input-item">
-      <input type="number" placeholder="输入" v-model="totalNum" />
-      <button @click="totalNumFn">确认</button>
+  <div class="home" ref="viewBox">
+    <div class="top-bannar">
+      <el-carousel :interval="5000" arrow="always">
+        <el-carousel-item v-for="item in 4" :key="item">
+          <h3>{{ item }}</h3>
+        </el-carousel-item>
+      </el-carousel>
     </div>
-    <div>
-      <input type="number" placeholder="输入每行最大数量" v-model="rowMaxNum" />
-      <button @click="rowMaxNumFn">确认</button>
-    </div>-->
-    <div class="content">
-      <!-- <div>{{ $store.state.auth.userName }}</div> -->
-      <div @contextmenu.prevent="contextmenu" class="left-side">
-        <div class="item" @click="addElementFn">方法1</div>
-        <div class="item" @click="changeFn">方法2</div>
-        <div class="item">方法3</div>
-        <div class="item">方法4</div>
-      </div>
-      <div class="main">
-        <div
-          v-for="(item, i) in matrix"
-          :key="i"
-          class="wrap"
-          :class="{ 'left-wrap': i % 2 }"
-        >
-          <div v-for="(list, j) in item" :key="j" class="box">
-            <div class="box-list" :class="list.class">
-              <span>{{ list.index }}</span>
-            </div>
-          </div>
-        </div>
-      </div>
-      <context-menu id="context-menu" ref="ctxMenu">
-        <li @click="addFn($event)">option 1</li>
-        <li class="disabled">option 2</li>
-        <li>option 3</li>
-      </context-menu>
+    <div class="box1"></div>
+    <div class="box2"></div>
+    <div class="box-wrap">
+      <div class="box-contetn-1"></div>
+      <div class="box-contetn-2"></div>
+      <div class="box-contetn-3"></div>
+      <div class="box-contetn-4"></div>
+      <div class="box-contetn-5"></div>
+      <div class="box-contetn-6"></div>
     </div>
   </div>
 </template>
 
 <script>
-import twoMatrix from "@/utils/utils.js";
-import contextMenu from "vue-context-menu";
 export default {
   name: "home",
-  components: { contextMenu },
-  data() {
-    return {
-      totalNum: 0,
-      rowMaxNum: 0,
-      imgArr: [],
-      matrix: []
-    };
-  },
-  methods: {
-    // 输入总数
-    totalNumFn() {
-      let _imgArr = [].concat(this.imgArr);
-      let _rowNum = this.rowMaxNum ? parseInt(this.rowMaxNum) : 3;
-      this.matrix = twoMatrix(_imgArr, this.totalNum, _rowNum);
-    },
-    // 输入每一行最大数量
-    rowMaxNumFn() {
-      let _imgArr = [].concat(this.imgArr);
-      let _row = parseInt(this.rowMaxNum) || 3;
-      this.matrix = twoMatrix(_imgArr, this.totalNum, _row);
-    },
-    // 增加元素
-    addElementFn() {
-      let obj = {
-        index: 1,
-        class: "right-normal",
-        type: "method1",
-        isEnd: false
-      };
-      this.imgArr.unshift(obj);
-    },
-    addFn(e) {
-      console.log(e);
-    },
-    changeFn() {
-      this.$store.dispatch("auth/setTokenFn", "haha");
-    },
-    contextmenu() {
-      this.$refs.ctxMenu.open();
-    },
-    logo(e) {
-      console.log(e);
-    }
-  },
-  created() {
-    this.imgArr = [];
-    console.log(this.$store);
-    console.log(this.$store.getters["auth/token"]);
-  },
-  watch: {
-    imgArr(newValue) {
-      this.matrix = twoMatrix(newValue);
-    }
+  mounted() {
+    window.addEventListener(
+      "scroll",
+      () => {
+        var scrollTop =
+          document.documentElement.scrollTop ||
+          window.pageYOffset ||
+          document.body.scrollTop;
+        if (scrollTop > 60) {
+          this.$store.dispatch("page/setNavBg", true);
+        } else {
+          this.$store.dispatch("page/setNavBg", false);
+        }
+      },
+      false
+    );
   }
 };
 </script>
 <style lang="less" scoped>
-.content {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-}
-.left-side {
-  width: 200px;
-  .item {
-    width: 100px;
-    height: 40px;
-    text-align: center;
-  }
-}
-.wrap {
+.top-bannar {
+  position: absolute;
+  height: 300px;
   width: 100%;
-  display: flex;
-  flex-direction: row;
-  width: 400px;
-  .box {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 50px;
-    margin-right: 50px;
-    &:last-child {
-      margin-right: 0;
-    }
-    .box-list {
-      width: 100px;
-      height: 100px;
-      background: #088;
-      line-height: 100px;
-      text-align: center;
-      color: #fff;
-      position: relative;
-    }
-    .right-normal::after {
-      position: absolute;
-      content: "——>";
-      color: #666;
-      right: -40px;
-    }
-    .left-normal::after {
-      position: absolute;
-      content: "<——";
-      color: #666;
-      left: -40px;
-    }
-    .row-end::after {
-      position: absolute;
-      content: "|";
-      color: #666;
-      bottom: -80px;
-    }
+  .el-carousel__item h3 {
+    color: #475669;
+    font-size: 18px;
+    opacity: 0.75;
+    line-height: 300px;
+    margin: 0;
+  }
+  .el-carousel__item:nth-child(2n) {
+    background-color: #99a9bf;
+  }
+  .el-carousel__item:nth-child(2n + 1) {
+    background-color: #d3dce6;
   }
 }
-.left-wrap {
-  justify-content: flex-end;
+.box1 {
+  position: absolute;
+  margin-top: 300px;
+  width: 100%;
+  height: 685px;
+  background: #eee;
+  z-index: 99;
+}
+.box2 {
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  left: 0;
+  top: 0;
+  background: url("../../../assets/imgs/01.jpg");
+  background-position: center;
+}
+.box-wrap {
+  position: absolute;
+  margin-top: 1738px;
+  width: 100%;
+  min-height: 600px;
+  background: #fff;
+  .box-contetn-1 {
+    width: 100%;
+    height: 700px;
+    background: #080;
+  }
+  .box-contetn-2 {
+    width: 100%;
+    height: 100vh;
+    background: url("../../../assets/imgs/01.jpg");
+    background-position: center;
+    background-attachment: fixed;
+  }
+  .box-contetn-3 {
+    width: 100%;
+    height: 700px;
+    background: #088;
+  }
+  .box-contetn-4 {
+    width: 100%;
+    height: 100vh;
+    background: url("../../../assets/imgs/02.jpg");
+    background-position: center;
+    background-attachment: fixed;
+  }
+  .box-contetn-5 {
+    width: 100%;
+    height: 600px;
+    background: #fff;
+  }
+  .box-contetn-6 {
+    width: 100%;
+    height: 500px;
+    background: #e10;
+  }
 }
 </style>

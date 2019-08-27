@@ -1,13 +1,19 @@
 <template>
   <div class="main">
-    <el-header :height="headHeight">
+    <el-header
+      :height="headHeight"
+      :class="{
+        fixNav: $store.getters['page/getFixNav'],
+        navBg: $store.getters['page/getNavBg']
+      }"
+    >
       <div id="topNav">
         <nav-menu :navArr="topMainArr" :navPosition="navPosition">
           <div slot="nav-icon" class="web-logo" @click="navToHomeFn">
             <img src="@/assets/logo.png" alt="logo" />
             <div>
               <h1>Ease-vue</h1>
-              <p>基于vue、element-ui的前端解决方案</p>
+              <p>基于vue、element-ui的PC端解决方案</p>
             </div>
           </div>
           <div slot="nav-sub">
@@ -93,25 +99,44 @@ export default {
 <style lang="less" scoped>
 .main {
   height: 100%;
+  .el-header {
+    padding: 0;
+    width: 100%;
+    border-bottom: 1px solid #eee;
+    box-shadow: 0 0 3px #eee;
+    box-sizing: border-box;
+  }
+  .fixNav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: transparent;
+    border: 0;
+    box-shadow: none;
+    z-index: 999;
+  }
+  .navBg {
+    background: #fff;
+    border-bottom: 1px solid #eee;
+    box-shadow: 0 0 3px #eee;
+  }
 }
 #topNav {
   margin-bottom: 0px;
   padding: 0 30px;
+  position: absolute;
+  width: 100%;
+  box-sizing: border-box;
 }
-.el-header {
-  padding: 0;
-  box-shadow: 0 0 3px #eee;
-  position: relative;
-  z-index: 10;
-}
+
 .el-main {
   padding: 0;
   background: #fff;
   min-height: calc(100vh - 160px);
   box-shadow: 0 0 3px #eee;
   .view {
-    padding: 20px;
     box-sizing: border-box;
+    padding: 0;
   }
 }
 .page-footer {
