@@ -174,7 +174,7 @@ export default {
       border: 1px solid #ccc;
       border-radius: 5px;
       color: #333;
-      box-shadow: 3px 3px 3px #eee;
+      // box-shadow: 3px 3px 3px #eee;
     }
   }
 }

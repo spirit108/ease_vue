@@ -55,6 +55,18 @@
           }
         }
       ]
+    },
+    {
+      "name": "Child",
+      "isNavTable": true,
+      "position": "aside",
+      "type": "main",
+      "url": "/main/icon",
+      "meta": {
+        "title": "icon",
+        "isAuth": true,
+        "layout": "topAsidePage"
+      }
     }
   ]
 }

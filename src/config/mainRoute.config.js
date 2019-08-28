@@ -32,50 +32,38 @@ const mainRoutes = [
     }
   },
   {
-    name: "hold",
+    name: "demo",
     isNavTable: true,
     position: "top",
     type: "main",
-    url: "/main/hold",
+    url: "/main/demo",
     meta: {
-      title: "hold",
+      title: "demo",
       isAuth: false,
       layout: "topPage"
     },
     children: [
       {
-        name: "test",
+        name: "demo-1",
         isNavTable: true,
-        url: "/main/hold/test",
+        url: "/main/demo/demo1",
         meta: {
-          title: "test",
+          title: "demo-1",
           isAuth: false,
           layout: "topPage"
         }
       },
       {
-        name: "test1",
-        isNavTable: false,
-        url: "/main/hold/test1",
+        name: "demo-2",
+        isNavTable: true,
+        url: "/main/demo/demo2",
         meta: {
-          title: "test1",
+          title: "demo-2",
           isAuth: false,
           layout: "topPage"
         }
       }
     ]
-  },
-  {
-    name: "icon",
-    isNavTable: true,
-    position: "top",
-    type: "main",
-    url: "/main/icon",
-    meta: {
-      title: "icon",
-      isAuth: false,
-      layout: "topPage"
-    }
   }
 ];
 export default mainRoutes;
