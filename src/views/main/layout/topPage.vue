@@ -99,6 +99,7 @@ export default {
 <style lang="less" scoped>
 .main {
   height: 100%;
+  position: relative;
   .el-header {
     padding: 0;
     width: 100%;
@@ -127,6 +128,7 @@ export default {
   position: absolute;
   width: 100%;
   box-sizing: border-box;
+  z-index: 99;
 }
 
 .el-main {
